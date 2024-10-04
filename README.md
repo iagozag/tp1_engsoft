@@ -13,25 +13,25 @@
 
 ## Membros da equipe e papel:
 
-Caroline Campos Carvalho (Full-stack)
+- Caroline Campos Carvalho (Full-stack)
 
-Deborah Brito Yamamoto (Full-Stack)
+- Deborah Brito Yamamoto (Full-Stack)
 
-Iago Zagnoli Albergaria (Front-end)
+- Iago Zagnoli Albergaria (Front-end)
 
-Manuel Junio Ferraz Cardoso (Back-end) 
+- Manuel Junio Ferraz Cardoso (Back-end) 
 
 ## Tecnologias (linguagem, frameworks e BD)
 
-JavaScript
+- JavaScript
 
-html
+- html
 
-React
+- React
 
-Python
+- Python
 
-Django
+- Django
 
-SQLlite (banco de dados)
+- SQLlite (banco de dados)
 
