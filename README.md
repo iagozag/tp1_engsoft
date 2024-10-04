@@ -1,6 +1,6 @@
-# Trabalho prático - Engenharia de Software
+# <h1 align="center"> Trabalho prático - Engenharia de Software <h1>
 
-## Objetivo e principais features:
+## <h3 align="center"> Objetivo e principais features: <h3>
 
   <h4 align="center">  O objetivo do nosso trabalho é desenvolver um sistema que facilite a organização e gestão de caronas na UFMG. Embora caronas já sejam praticadas na universidade há algum tempo, o método atual, que ocorre via WhatsApp, apresenta diversas limitações. Uma dessas desvantagens é a falta de controle sobre o status das vagas oferecidas, ou seja, muitas vezes o passageiro se depara com uma carona que já teve todas as suas vagas preenchidas, o que o aplicativo de mensagens não consegue gerenciar de forma eficiente. 
    
@@ -11,7 +11,7 @@
    Portanto, nosso sistema incluiria as seguintes funcionalidades principais: consulta de caronas disponíveis, cadastro de caronas por motoristas, realização de caronas e o registro de novos usuários. Assim, buscamos oferecer uma solução mais eficiente, segura e prática para a comunidade da UFMG. <h4>
 
 
-## Membros da equipe e papel:
+## <h3 align="center"> Membros da equipe e papel: <h3>
 
 - Caroline Campos Carvalho (Full-stack)
 
@@ -21,7 +21,7 @@
 
 - Manuel Junio Ferraz Cardoso (Back-end) 
 
-## Tecnologias (linguagem, frameworks e BD)
+## <h3 align="center"> Tecnologias (linguagem, frameworks e BD) <h3>
 
 - JavaScript
 
