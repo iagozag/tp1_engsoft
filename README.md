@@ -27,8 +27,6 @@
 
 - html
 
-- React
-
 - Python
 
 - Django
