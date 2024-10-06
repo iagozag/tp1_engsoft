@@ -1,0 +1,16 @@
+<!-- templates/usuarios/cadastro.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Completar Cadastro</title>
+</head>
+<body>
+    <h2>Completar Cadastro</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Exibe o formulário com os campos formatados -->
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>
