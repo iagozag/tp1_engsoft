@@ -7,6 +7,7 @@ from .forms import UsuarioForm
 from .forms import VeiculoForm, CompletaForm
 from django.http import HttpResponse
 from .models import Usuario, Veiculo
+from .forms import LoginForm
 
 def cadastrar_usuario(request):
     if request.method == 'POST':
@@ -72,3 +73,25 @@ def cadastrar_veiculo(request):
 
 def home(request):
     return HttpResponse("Caronas UFMG")
+
+from django.contrib.auth.hashers import check_password 
+
+def login_usuario(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            senha = form.cleaned_data['senha']
+
+            try:
+                usuario = Usuario.objects.get(email=email)
+            except Usuario.DoesNotExist:
+                return HttpResponse("Email inválido!")
+
+            if senha == usuario.senha:
+                request.session['usuario_id'] = usuario.cpf
+                return redirect('home') 
+            return HttpResponse("Senha incorreta!")
+    form = LoginForm()
+
+    return render(request, 'login/mysite/login.html', {'form': form})
