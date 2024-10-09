@@ -23,5 +23,6 @@ urlpatterns = [
     path('cadastro/',views.cadastrar_usuario, name='cadastro' ),
     path('cadastrarveiculo/',views.cadastrar_veiculo, name='veiculo'),
     path('',views.home, name = 'home'),
-    path('completarcadastro/', views.completar_cadastro, name='completa')
+    path('completarcadastro/', views.completar_cadastro, name='completa'),
+    path('login/', views.login_usuario, name = 'login'),
 ]

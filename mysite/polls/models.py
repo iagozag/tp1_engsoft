@@ -51,4 +51,3 @@ class Veiculo(models.Model):
         return f'{self.modelo} ({self.placa})'
     
     
-    

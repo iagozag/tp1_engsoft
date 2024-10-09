@@ -23,4 +23,7 @@ class VeiculoForm(forms.ModelForm):
         model = Veiculo
         fields = ['placa','modelo', 'cor'] 
    
+class LoginForm(forms.Form):
+    email = forms.CharField(label = "Email", max_length=50)
+    senha = forms.CharField(widget=forms.PasswordInput)
         
