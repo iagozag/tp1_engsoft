@@ -13,7 +13,6 @@ def cadastrar_usuario(request):
     if request.method == 'POST':
         form = UsuarioForm(request.POST)
         if form.is_valid():
-    
             request.session['email'] = form.cleaned_data['email']
             request.session['senha'] = form.cleaned_data['senha']
             
@@ -72,7 +71,7 @@ def cadastrar_veiculo(request):
     return render(request, 'mysite/cadastrarveiculo.html', {'form': form})
 
 def home(request):
-    return HttpResponse("Caronas UFMG")
+    return render(request, 'mysite/home.html')
 
 from django.contrib.auth.hashers import check_password 
 
@@ -94,4 +93,4 @@ def login_usuario(request):
             return HttpResponse("Senha incorreta!")
     form = LoginForm()
 
-    return render(request, 'login/mysite/login.html', {'form': form})
+    return render(request, 'mysite/login.html', {'form': form})
