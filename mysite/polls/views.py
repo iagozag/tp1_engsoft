@@ -48,7 +48,7 @@ def completar_cadastro(request):
     else:
         form = CompletaForm()
     
-    return render(request, 'mysite/cadastro.html', {'form': form})
+    return render(request, 'mysite/completa.html', {'form': form})
 
 
 def cadastrar_veiculo(request):
@@ -68,7 +68,7 @@ def cadastrar_veiculo(request):
     else:
         form = VeiculoForm()
     
-    return render(request, 'mysite/cadastrarveiculo.html', {'form': form})
+    return render(request, 'mysite/veiculo.html', {'form': form})
 
 def home(request):
     return render(request, 'mysite/home.html')
