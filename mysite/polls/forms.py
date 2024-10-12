@@ -11,10 +11,9 @@ class CompletaForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ['nome', 'cpf', 'data_nascimento', 'telefone']
-        
-    e_motorista = forms.ChoiceField(
-        choices=[('sim', 'Sim'), ('nao', 'Não')],
-        widget=forms.RadioSelect(),
+
+    e_motorista = forms.BooleanField(
+        required=False,
         label="Você é um motorista?"
     )
     
