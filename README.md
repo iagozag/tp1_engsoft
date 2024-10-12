@@ -33,3 +33,25 @@
 
 - SQLlite (banco de dados)
 
+
+## <h3 align="center"> Backlog do produto <h3>
+
+1:  como usuário, quero consultar uma carona 
+
+2: como usuário, quero oferecer uma carona
+
+3: como usuário, eu quero criar, atualizar ou deletar meu login 
+
+4: Como usuário, eu quero realizar a carona
+
+5: como usuário, quero ter um chat com o outro usuário
+
+6: como usuário, quero avaliar outro usuário
+
+7: como usuário, quero que mostre o trajeto
+
+8: como usuário, quero fazer o pagamento através da plataforma
+
+9: como usuário, Eu quero receber notificações sobre a minha carona (oferta ou solicitação)
+
+10: como usuário, Eu quero ter a opção de cancelar uma carona previamente agendada
