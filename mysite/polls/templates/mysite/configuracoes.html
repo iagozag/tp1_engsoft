@@ -1,0 +1,26 @@
+<!-- templates/usuarios/cadastro.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações</title>
+  </head>
+  <body>
+    <main>
+        <h1>Sua conta</h1>
+        <form method="post">
+          {% csrf_token %}
+          <div>
+                <button name = "cadastra_veiculo">Cadastrar um veículo</button>
+              <button>Descadastrar um veiculo</button>
+            
+            
+              <button name = "deleta">Deletar minha conta</button> 
+            
+          </div>
+        </form>
+    </main>
+  </body>
+</html>
+

@@ -94,3 +94,19 @@ def login_usuario(request):
     form = LoginForm()
 
     return render(request, 'mysite/login.html', {'form': form})
+
+
+def configuracoes(request):
+    # if not request.user.is_authenticated: return redirect('login')
+
+    if request.method == 'POST':
+        if 'deleta' in request.POST:
+            cpf = request.session['cpf']
+            Usuario.objects.filter(cpf=cpf).delete()
+            return redirect('login')
+        
+        if 'cadastra_veiculo' in request.POST:
+            return redirect('veiculo')
+    
+    return render(request, 'mysite/configuracoes.html')
+
