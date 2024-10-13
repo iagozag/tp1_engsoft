@@ -1,4 +1,3 @@
-<!-- templates/usuarios/cadastro.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -9,15 +8,53 @@
   <body>
     <main>
         <h1>Sua conta</h1>
+        
         <form method="post">
           {% csrf_token %}
-          <div>
-                <button name = "cadastra_veiculo">Cadastrar um veículo</button>
-              <button>Descadastrar um veiculo</button>
-            
-            
-              <button name = "deleta">Deletar minha conta</button> 
-            
+          <h4>Alterar seu nome</h4>
+          {{ formnome.as_p }}
+          <button type="submit" name="bnome">Alterar</button>
+        </form>
+
+        <form method="post">
+          {% csrf_token %}
+          <h4>Alterar sua data de nascimento</h4>
+          {{ formdata.as_p }}
+          <button type="submit" name="bdata">Alterar</button>
+        </form>
+
+        <form method="post">
+          {% csrf_token %}
+          <h4>Alterar seu número de telefone</h4>
+          {{ formtel.as_p }}
+          <button type="submit" name="btel">Alterar</button>
+        </form>
+
+        <form method="post">
+          {% csrf_token %}
+          <h4>Alterar seu e-mail</h4>
+          {{ formemail.as_p }}
+          <button type="submit" name="bemail">Alterar</button>
+        </form>
+
+        <form method="post">
+          {% csrf_token %}
+          <h4>Alterar sua senha</h4>
+          {{ formsen.as_p }}
+          <button type="submit" name="bsenha">Alterar</button>
+        </form>
+
+        <form method="post">
+          {% csrf_token %}
+          <h4>Excluir sua conta</h4>
+          {{ formdel.as_p }}
+          <button type="submit" name="bdel">Excluir</button>
+        </form>  
+          <div style="display: flex;">
+                <button name = "cadastra">Cadastrar um veículo</button>
+              <div style="left: 5%; position: relative;">
+                <button name = "descadastra_veiculo">Descadastrar um veiculo</button>
+              </div>
           </div>
         </form>
     </main>
