@@ -97,15 +97,76 @@ def login_usuario(request):
 
 
 def configuracoes(request):
-    # if not request.user.is_authenticated: return redirect('login')
+    if 'cpf' not in request.session:
+        return redirect('cadastro')
+    
+    cpf = request.session['cpf']
 
+    d = {'formnome' : NomeForm(),
+         'formdata' : DataForm(),
+         'formtel'  : TelefoneForm(),
+         'formsen'  : SenhaForm(),
+         'formemail': EmailForm(),
+         'formdel'  : DeletaForm()
+        }
+    
     if request.method == 'POST':
-        if 'deleta' in request.POST:
-            cpf = request.session['cpf']
-            Usuario.objects.filter(cpf=cpf).delete()
+        if 'cadastra' in request.POST: return redirect('veiculo')
+        
+        if 'descadastra_veiculo' in request.POST:
+            Veiculo.objects.filter(cpf_motorista = cpf).delete()
             return redirect('login')
 
-        if 'cadastra_veiculo' in request.POST:
-            return redirect('veiculo')
+        formNome = NomeForm(request.POST)
+        if formNome.is_valid():
+            novoNome = formNome.cleaned_data['nome']
+            user = Usuario.objects.get(cpf=cpf)
+            user.nome = novoNome
+            user.save()
+            return render(request, 'mysite/configuracoes.html',d)
 
-    return render(request, 'mysite/configuracoes.html')
+
+        formData = DataForm(request.POST)
+        if formData.is_valid():
+            novaData = formData.cleaned_data['data']
+            user = Usuario.objects.get(cpf=cpf)
+            user.data_nascimento = novaData
+            user.save()
+            return render(request, 'mysite/configuracoes.html',d)
+
+        formTel = TelefoneForm(request.POST)
+        if formTel.is_valid():
+            novoTel = formTel.cleaned_data['telefone']
+            user = Usuario.objects.get(cpf=cpf)
+            user.telefone = novoTel
+            user.save()
+            return render(request, 'mysite/configuracoes.html',d)
+
+        formSenha = SenhaForm(request.POST)
+        if formSenha.is_valid():
+            senhaAtual, novaSenha = formSenha.cleaned_data['senhaAtual'], formSenha.cleaned_data['novaSenha']
+            user = Usuario.objects.get(cpf=cpf)
+            if senhaAtual!=user.senha: return HttpResponse("Senha incorreta!")
+            user.senha = novaSenha
+            user.save()
+            return render(request, 'mysite/configuracoes.html',d)
+
+        formEmail = EmailForm(request.POST)
+        if formEmail.is_valid():
+            email = formEmail.cleaned_data['email']
+            user = Usuario.objects.get(cpf=cpf)
+            user.email = email
+            user.save()
+            return render(request, 'mysite/configuracoes.html',d)
+
+        formDel = DeletaForm(request.POST)
+        if formDel.is_valid():
+            senha = formDel.cleaned_data['senha']
+            user = Usuario.objects.get(cpf=cpf)
+            if senha!=user.senha: return HttpResponse("Senha incorreta!")
+            logout(request)
+            user.delete()
+            return redirect('login')
+
+
+    return render(request, 'mysite/configuracoes.html',d)
