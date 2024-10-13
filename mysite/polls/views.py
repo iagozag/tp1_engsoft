@@ -15,12 +15,12 @@ def cadastrar_usuario(request):
         if form.is_valid():
             request.session['email'] = form.cleaned_data['email']
             request.session['senha'] = form.cleaned_data['senha']
-            
+
             return redirect('completa')  # Redireciona para a página inicial ou outra página de sucesso
   # Redireciona para a página inicial ou outra página de sucesso
     else:
         form = UsuarioForm()
-    
+
     return render(request, 'mysite/cadastro.html', {'form': form})
 
 def completar_cadastro(request):
@@ -33,28 +33,28 @@ def completar_cadastro(request):
             usuario.email = email_usuario
             usuario.senha = senha_usuario
             usuario.save()
-            
+
             request.session['cpf'] = usuario.cpf
-            
+
             del request.session['email']
             del request.session['senha']
-            
+
             e_motorista = form.cleaned_data['e_motorista']
             if e_motorista == 'sim':
                 request.session['usuario'] = form.cleaned_data
-                return redirect('veiculo') 
+                return redirect('veiculo')
             return redirect('home')  # Redireciona para a página inicial ou outra página de sucesso
   # Redireciona para a página inicial ou outra página de sucesso
     else:
         form = CompletaForm()
-    
+
     return render(request, 'mysite/completa.html', {'form': form})
 
 
 def cadastrar_veiculo(request):
     if 'cpf' not in request.session:
         return redirect('cadastrar_usuario')
-    
+
     if request.method == 'POST':
         form = VeiculoForm(request.POST)
         if form.is_valid():
@@ -67,13 +67,13 @@ def cadastrar_veiculo(request):
             return redirect('home')  # Redireciona para a página inicial ou outra página de sucesso
     else:
         form = VeiculoForm()
-    
+
     return render(request, 'mysite/veiculo.html', {'form': form})
 
 def home(request):
     return render(request, 'mysite/home.html')
 
-from django.contrib.auth.hashers import check_password 
+from django.contrib.auth.hashers import check_password
 
 def login_usuario(request):
     if request.method == 'POST':
@@ -89,7 +89,7 @@ def login_usuario(request):
 
             if senha == usuario.senha:
                 request.session['usuario_id'] = usuario.cpf
-                return redirect('home') 
+                return redirect('home')
             return HttpResponse("Senha incorreta!")
     form = LoginForm()
 
@@ -104,9 +104,8 @@ def configuracoes(request):
             cpf = request.session['cpf']
             Usuario.objects.filter(cpf=cpf).delete()
             return redirect('login')
-        
+
         if 'cadastra_veiculo' in request.POST:
             return redirect('veiculo')
-    
-    return render(request, 'mysite/configuracoes.html')
 
+    return render(request, 'mysite/configuracoes.html')
