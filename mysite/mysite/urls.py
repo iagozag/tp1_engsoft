@@ -20,10 +20,10 @@ from django.urls import path
 from polls import views
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('cadastro/',views.cadastrar_usuario, name='cadastro' ),
-    path('cadastrarveiculo/',views.cadastrar_veiculo, name='veiculo'),
+    path('cadastro/',views.cadastrar_usuario, name='cadastrar_usuario' ),
+    path('veiculo/',views.cadastrar_veiculo, name='veiculo'),
     path('',views.home, name = 'home'),
-    path('completarcadastro/', views.completar_cadastro, name='completa'),
+    path('completa_cadastro/', views.completar_cadastro, name='completa'),
     path('login/', views.login_usuario, name = 'login'),
     path('configuracoes/',views.configuracoes,name='configuracoes')
 ]
