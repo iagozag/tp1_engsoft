@@ -36,11 +36,11 @@
 
 ## <h3 align="center"> Backlog do produto <h3>
 
-1:  como usuário, quero consultar uma carona.
+1: como usuário, eu quero criar, atualizar ou deletar meu login.
 
 2: como usuário, quero oferecer uma carona.
 
-3: como usuário, eu quero criar, atualizar ou deletar meu login.
+3: como usuário, quero consultar uma carona.
 
 4: Como usuário, eu quero realizar a carona.
 
@@ -55,3 +55,28 @@
 9: como usuário, eu quero receber notificações sobre a minha carona (oferta ou solicitação).
 
 10: como usuário, eu quero ter a opção de cancelar uma carona previamente agendada.
+
+
+## <h3 align="center"> Backlog da sprint <h3>
+
+## <h4> 1: como usuário, quero oferecer uma carona <h4>
+
+1.1) Banco de dados e realizar cadastro (Back-End, Carol)
+
+1.2) Realizar o login (Back-End, Déborah)
+
+1.3) Atualizar e deletar login (Back-End, Déborah)
+
+1.4) Fazer o design do formulário de cadastro e login (Front-End, Iago)
+
+## <h4> 2: como usuário, quero oferecer uma carona <h4>
+
+2.1) Lógica de criação de caronas (Back-end, Manuel)
+
+2.2) Implementação da interface de oferta de carona (Front-end, Iago)
+
+2.3) Visualização e gerenciamento das caronas oferecidas (Back-end, Deborah)
+
+2.4) Visualização e gerenciamento das caronas oferecidas (Front-end, Carol)
+
+2.5) Testes funcionais e integração (Todos)
