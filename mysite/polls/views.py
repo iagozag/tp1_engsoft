@@ -7,7 +7,8 @@ from .forms import UsuarioForm
 from .forms import VeiculoForm, CompletaForm
 from django.http import HttpResponse
 from .models import Usuario, Veiculo
-from .forms import LoginForm
+from .forms import LoginForm, NomeForm, SenhaForm, DataForm, EmailForm, TelefoneForm, DeletaForm
+from django.contrib.auth import logout
 
 def cadastrar_usuario(request):
     if request.method == 'POST':
