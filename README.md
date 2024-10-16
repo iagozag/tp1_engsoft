@@ -65,7 +65,7 @@
 
 1.2) Realizar o login (Back-End, Déborah)
 
-1.3) Atualizar e deletar login (Back-End, Déborah)
+1.3) Atualizar e deletar login (Back-End, Manuel)
 
 1.4) Fazer o design do formulário de cadastro e login (Front-End, Iago)
 
