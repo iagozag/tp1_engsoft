@@ -44,3 +44,14 @@ class EmailForm(forms.Form):
 
 class DeletaForm(forms.Form):
     senha = forms.CharField(label = 'Confirme a sua senha', max_length=128)
+
+class CaronaForm(forms.Form):
+    escolhas = [(1,'1'),
+                (2,'2'),
+                (3,'3'),
+                (4,'4')]
+    
+    quantidade = forms.ChoiceField(choices=escolhas,label='Número de vagas')
+    ponto_encontro = forms.CharField(label='Ponto de encontro', max_length=128)
+    destino = forms.CharField(label='Destino')
+    data_hora = forms.DateTimeField(label='Data e horário de partida')
