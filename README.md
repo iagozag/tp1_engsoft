@@ -19,7 +19,7 @@
 
 - Iago Zagnoli Albergaria (Front-end)
 
-- Manuel Junio Ferraz Cardoso (Back-end) 
+- Manuel Junio Ferraz Cardoso (Full-Stack) 
 
 ## <h3 align="center"> Tecnologias (linguagem, frameworks e BD) <h3>
 
