@@ -61,13 +61,15 @@
 
 ## <h4> 1: como usuário, quero oferecer uma carona <h4>
 
-1.1) Banco de dados e realizar cadastro (Back-End, Carol)
+1.1) Banco de dados e realizar cadastro (Back-End, Caroline)
 
 1.2) Realizar o login (Back-End, Déborah)
 
 1.3) Atualizar e deletar login (Back-End, Manuel)
 
 1.4) Fazer o design do formulário de cadastro e login (Front-End, Iago)
+
+1.5) Testes funcionais e integração (Todos)
 
 ## <h4> 2: como usuário, quero oferecer uma carona <h4>
 
@@ -77,6 +79,32 @@
 
 2.3) Visualização e gerenciamento das caronas oferecidas (Back-end, Deborah)
 
-2.4) Visualização e gerenciamento das caronas oferecidas (Front-end, Carol)
+2.4) Visualização e gerenciamento das caronas oferecidas (Front-end, Caroline)
 
 2.5) Testes funcionais e integração (Todos)
+
+## <h4> 3: como usuário, quero consultar uma carona <h4>
+
+3.1) Criar mecanismo de busca (Back-end, Caroline)
+
+3.2) Criar interface de busca (Front-end, Iago)
+
+3.3) Criar filtro de busca (Back-end e front-end, Deborah)
+
+3.4) Criar interface para visualização dos resultados da busca (Front-end, Manuel)
+
+3.5) Testes funcionais e integração (Todos)
+
+## <h4> 4: como usuário, quero efetuar uma carona <h4>
+
+4.1) Criar lógica de inscrição em carona (Back-end, Deborah)
+
+4.2) Criar interface que confirma carona (Front-end, Iago)
+
+4.3) Criar lógica para cancelamento de carona (Back-end, Caroline)
+
+4.4) Criar interface para cancelamento (Front-end, Manuel)
+
+4.5) Testes funcionais e integração (Todos)
+
+
