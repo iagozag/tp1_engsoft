@@ -6,8 +6,8 @@ from django.shortcuts import render, redirect
 from .forms import UsuarioForm
 from .forms import VeiculoForm, CompletaForm
 from django.http import HttpResponse
-from .models import Usuario, Veiculo
-from .forms import LoginForm, NomeForm, SenhaForm, DataForm, EmailForm, TelefoneForm, DeletaForm
+from .models import Usuario, Veiculo, Carona
+from .forms import LoginForm, NomeForm, SenhaForm, DataForm, EmailForm, TelefoneForm, DeletaForm, CaronaForm
 from django.contrib.auth import logout
 
 def cadastrar_usuario(request):
@@ -171,3 +171,38 @@ def configuracoes(request):
 
 
     return render(request, 'mysite/configuracoes.html',d)
+
+
+def criarCaronas(request):
+    if 'cpf' not in request.session:
+        return redirect('cadastro')
+    
+    if request.method == 'POST':
+        cpf = request.session['cpf']
+
+        try:
+            veiculo = Veiculo.objects.get(cpf_motorista = cpf)
+        except Veiculo.DoesNotExist:
+            return HttpResponse("Veículo não cadastrado")
+
+        form = CaronaForm(request.POST)
+        if form.is_valid():
+            qtd = form.cleaned_data['quantidade']
+            ponto_encontro = form.cleaned_data['ponto_encontro']
+            destino = form.cleaned_data['destino']
+            data_hora = form.cleaned_data['data_hora']
+
+            # pensar em como validar entradas
+
+            carona = Carona()
+            carona.cpf_motorista = cpf
+            carona.quantidade = qtd
+            carona.veiculo = veiculo.placa
+            carona.ponto_encontro = ponto_encontro
+            carona.destino = destino
+            carona.data_hora = data_hora
+            carona.save()
+
+            return HttpResponse("Carona criada com sucesso")
+
+    return render(request, 'mysite/criarcarona.html', {'form':CaronaForm()})
