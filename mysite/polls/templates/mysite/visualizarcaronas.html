@@ -17,6 +17,7 @@
                 <th>Ponto de Encontro</th>
                 <th>Destino</th>
                 <th>Data e Hora</th>
+                <th>Ações</th>
             </tr>
             {% for carona in caronas %}
                 <tr>
@@ -26,6 +27,10 @@
                     <td>{{carona.ponto_encontro}}</th>
                     <td>{{carona.destino}}</th>
                     <td>{{carona.data_hora}}</th>
+                    <td>
+                        <a href="{% url 'editar_carona' carona.id %}">Editar</a> |
+                        <a href="{% url 'cancelar_carona' carona.id%}">Cancelar</a>
+                    </td>
                 </tr>
             {% endfor %}
         </table>
