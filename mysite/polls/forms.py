@@ -2,6 +2,7 @@ from django import forms
 from .models import Usuario
 from .models import Veiculo
 class UsuarioForm(forms.ModelForm):
+    senha = forms.CharField(widget=forms.PasswordInput)
     class Meta:
         model = Usuario
         fields = ['email', 'senha']
@@ -62,4 +63,3 @@ class CaronaForm(forms.Form):
 
 class ConfirmacaoCancelamentoForm(forms.Form):
     confirmar = forms.BooleanField(label = 'Confirmo o cancelamento', required=True)
-    
