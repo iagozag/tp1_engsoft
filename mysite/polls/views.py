@@ -2,13 +2,14 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UsuarioForm
-from .forms import VeiculoForm, CompletaForm
+from .forms import VeiculoForm, CompletaForm, CaronaForm
 from django.http import HttpResponse
 from .models import Usuario, Veiculo, Carona
 from .forms import LoginForm, NomeForm, SenhaForm, DataForm, EmailForm, TelefoneForm, DeletaForm, CaronaForm
 from django.contrib.auth import logout
+from .forms import ConfirmacaoCancelamentoForm
 
 def cadastrar_usuario(request):
     if request.method == 'POST':
@@ -222,3 +223,40 @@ def visualizar_caronas(request):
     caronas = Carona.objects.filter(cpf_motorista = cpf)
 
     return render(request, 'mysite/visualizarcaronas.html', {'caronas': caronas})
+
+def editar_carona(request, carona_id):
+    carona = get_object_or_404(Carona, id=carona_id)
+    #forms modelo forms.Form --> exige que usemos o processo manual == não pode usar instance
+    if request.method == 'POST':
+        form = CaronaForm(request.POST)
+        if form.is_valid():
+            carona.quantidade = form.cleaned_data['quantidade']
+            carona.ponto_encontro = form.cleaned_data['ponto_encontro']
+            carona.destino = form.cleaned_data['destino']
+            carona.data_hora = form.cleaned_data['data_hora']
+            carona.save()
+            return redirect('visualizar_caronas')
+    else:
+        form = CaronaForm(initial={
+            'quantidade': carona.quantidade,
+            'ponto_encontro': carona.ponto_encontro,
+            'destino': carona.destino,
+            'data_hora': carona.data_hora,
+        })
+    
+    return render(request, 'mysite/editar_carona.html', {'form': form, 'carona': carona})
+
+
+def cancelar_carona(request, carona_id):
+    carona = get_object_or_404(Carona, id=carona_id)
+
+    if request.method == 'POST':
+        form = ConfirmacaoCancelamentoForm(request.POST)
+        if form.is_valid() and form.cleaned_data['confirmar']:
+            carona.delete()
+            return redirect('visualizar_caronas')
+    else:
+            form = ConfirmacaoCancelamentoForm()
+
+
+    return render(request, 'mysite/cancelar_carona.html', {'carona': carona, 'form':form})

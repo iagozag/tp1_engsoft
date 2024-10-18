@@ -59,3 +59,7 @@ class CaronaForm(forms.Form):
         widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         input_formats=['%d/%m/%Y %h:%M']
         )
+
+class ConfirmacaoCancelamentoForm(forms.Form):
+    confirmar = forms.BooleanField(label = 'Confirmo o cancelamento', required=True)
+    
