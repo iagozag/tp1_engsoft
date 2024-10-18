@@ -213,4 +213,12 @@ def criar_carona(request):
 
     return render(request, 'mysite/criarcarona.html', {'form':CaronaForm()})
 
-# def visualizar_caronas(request):
+def visualizar_caronas(request):
+    #eu vou estar logada e eu quero ver minhas caronas OFERECIDAS
+    cpf = request.session['cpf']
+    try: veiculo = Veiculo.objects.get(cpf_motorista = cpf)
+    except Veiculo.DoesNotExist : return HttpResponse("Nenhum veículo cadastrado nesse CPF")
+
+    caronas = Carona.objects.filter(cpf_motorista = cpf)
+
+    return render(request, 'mysite/visualizarcaronas.html', {'caronas': caronas})
