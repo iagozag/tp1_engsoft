@@ -23,7 +23,7 @@ class VeiculoForm(forms.ModelForm):
         fields = ['placa','modelo', 'cor']
 
 class LoginForm(forms.Form):
-    email = forms.CharField(label = "Email", max_length=50)
+    email = forms.EmailField(label = "Email", max_length=50)
     senha = forms.CharField(widget=forms.PasswordInput)
 
 class NomeForm(forms.Form):
@@ -40,7 +40,7 @@ class SenhaForm(forms.Form):
     novaSenha = forms.CharField(label = 'Digite sua nova senha', max_length=128)
 
 class EmailForm(forms.Form):
-    email = forms.CharField(label = 'Digite o novo e-mail', max_length=50)
+    email = forms.EmailField(label = 'Digite o novo e-mail', max_length=50)
 
 class DeletaForm(forms.Form):
     senha = forms.CharField(label = 'Confirme a sua senha', max_length=128)
@@ -54,4 +54,8 @@ class CaronaForm(forms.Form):
     quantidade = forms.ChoiceField(choices=escolhas,label='Número de vagas')
     ponto_encontro = forms.CharField(label='Ponto de encontro', max_length=128)
     destino = forms.CharField(label='Destino')
-    data_hora = forms.DateTimeField(label='Data e horário de partida')
+    data_hora = forms.DateTimeField(
+        label='Data e horário de partida',
+        widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        input_formats=['%d/%m/%Y %h:%M']
+        )

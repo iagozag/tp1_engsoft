@@ -72,6 +72,7 @@ def cadastrar_veiculo(request):
     return render(request, 'mysite/veiculo.html', {'form': form})
 
 def home(request):
+    print(Carona.objects.values())
     return render(request, 'mysite/home.html')
 
 from django.contrib.auth.hashers import check_password
@@ -89,7 +90,11 @@ def login_usuario(request):
                 return HttpResponse("Email inválido!")
 
             if senha == usuario.senha:
-                request.session['usuario_id'] = usuario.cpf
+                # eu (manuel) mudei pq as verificações estavam requisitando o cpf na sessão
+                # só comentado pra evitar o risco de eu ter feito algo errado
+                # request.session['usuario_id'] = usuario.cpf
+                request.session['cpf'] = usuario.cpf
+
                 return redirect('home')
             return HttpResponse("Senha incorreta!")
     form = LoginForm()
@@ -98,8 +103,7 @@ def login_usuario(request):
 
 
 def configuracoes(request):
-    if 'cpf' not in request.session:
-        return redirect('cadastro')
+    if 'cpf' not in request.session: return redirect('cadastrar_usuario')
     
     cpf = request.session['cpf']
 
@@ -167,24 +171,21 @@ def configuracoes(request):
             if senha!=user.senha: return HttpResponse("Senha incorreta!")
             logout(request)
             user.delete()
-            return redirect('login')
+            return redirect('cadastrar_usuario')
 
 
     return render(request, 'mysite/configuracoes.html',d)
 
 
-def criarCaronas(request):
-    if 'cpf' not in request.session:
-        return redirect('cadastro')
+def criar_carona(request):
+    if 'cpf' not in request.session: return redirect('cadastrar_usuario')
+    
+    cpf = request.session['cpf']
+    try: veiculo = Veiculo.objects.get(cpf_motorista = cpf)
+    except Veiculo.DoesNotExist: return HttpResponse("Veículo não cadastrado")
+    
     
     if request.method == 'POST':
-        cpf = request.session['cpf']
-
-        try:
-            veiculo = Veiculo.objects.get(cpf_motorista = cpf)
-        except Veiculo.DoesNotExist:
-            return HttpResponse("Veículo não cadastrado")
-
         form = CaronaForm(request.POST)
         if form.is_valid():
             qtd = form.cleaned_data['quantidade']
@@ -195,14 +196,20 @@ def criarCaronas(request):
             # pensar em como validar entradas
 
             carona = Carona()
-            carona.cpf_motorista = cpf
+            # carona.cpf_motorista = cpf
+            carona.cpf_motorista = Usuario.objects.get(cpf=cpf)
             carona.quantidade = qtd
-            carona.veiculo = veiculo.placa
+            carona.veiculo = veiculo
             carona.ponto_encontro = ponto_encontro
             carona.destino = destino
             carona.data_hora = data_hora
-            carona.save()
+            
+            # respostas temporárias, vou melhorar quando fazer as validações da entrada, mude para true se quiser testar
+            if False: return HttpResponse('Ponto de encontro inválido')
+            if False: return HttpResponse('Pondo de destino inválido')
+            if False: return HttpResponse('Data inválida')
 
+            carona.save()
             return HttpResponse("Carona criada com sucesso")
 
     return render(request, 'mysite/criarcarona.html', {'form':CaronaForm()})
