@@ -27,4 +27,5 @@ urlpatterns = [
     path('login/', views.login_usuario, name = 'login'),
     path('configuracoes/',views.configuracoes,name='configuracoes'),
     path('criar_carona/',views.criar_carona,name='criar_carona'),
+    #path('visualizar_caronas/',)
 ]

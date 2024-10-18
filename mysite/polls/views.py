@@ -41,11 +41,11 @@ def completar_cadastro(request):
             del request.session['senha']
 
             e_motorista = form.cleaned_data['e_motorista']
-            if e_motorista == 'sim':
+            if e_motorista:
                 request.session['usuario'] = form.cleaned_data
                 return redirect('veiculo')
-            return redirect('home')  # Redireciona para a página inicial ou outra página de sucesso
-  # Redireciona para a página inicial ou outra página de sucesso
+            
+            return redirect('home')  
     else:
         form = CompletaForm()
 
@@ -212,3 +212,5 @@ def criar_carona(request):
             return HttpResponse("Carona criada com sucesso")
 
     return render(request, 'mysite/criarcarona.html', {'form':CaronaForm()})
+
+# def visualizar_caronas(request):
