@@ -72,7 +72,6 @@ def cadastrar_veiculo(request):
     return render(request, 'mysite/veiculo.html', {'form': form})
 
 def home(request):
-    print(Carona.objects.values())
     return render(request, 'mysite/home.html')
 
 from django.contrib.auth.hashers import check_password
