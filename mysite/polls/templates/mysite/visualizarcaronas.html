@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <title>Visualizar Caronas</title>
+</head>
+<body>
+    <h1> Caronas Oferecidas</h1>
+
+    {% if caronas %}
+        <table border = "1">
+            <tr>
+                <th>ID</th>
+                <th>Quantidade</th>
+                <th>Veículo</th>
+                <th>Ponto de Encontro</th>
+                <th>Destino</th>
+                <th>Data e Hora</th>
+            </tr>
+            {% for carona in caronas %}
+                <tr>
+                    <td>{{carona.id}}</td>
+                    <td>{{carona.quantidade}}</td>
+                    <td>{{carona.veiculo}}</th>
+                    <td>{{carona.ponto_encontro}}</th>
+                    <td>{{carona.destino}}</th>
+                    <td>{{carona.data_hora}}</th>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p> Você não tem nenhuma carona oferecida no momento :).</p>
+    {% endif %}
+
+    <a href="{% url 'home' %}">Voltar para página inicial</a>
+</body>
+</html>
