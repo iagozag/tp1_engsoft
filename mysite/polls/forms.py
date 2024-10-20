@@ -1,6 +1,9 @@
 from django import forms
 from .models import Usuario
 from .models import Veiculo
+from django.utils import timezone
+from datetime import timedelta
+
 class UsuarioForm(forms.ModelForm):
     senha = forms.CharField(widget=forms.PasswordInput)
     class Meta:
@@ -54,12 +57,24 @@ class CaronaForm(forms.Form):
     
     quantidade = forms.ChoiceField(choices=escolhas,label='Número de vagas')
     ponto_encontro = forms.CharField(label='Ponto de encontro', max_length=128)
-    destino = forms.CharField(label='Destino')
+    destino = forms.CharField(label='Destino',max_length=128)
     data_hora = forms.DateTimeField(
         label='Data e horário de partida',
         widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         input_formats=['%d/%m/%Y %h:%M']
         )
+    
+    def clean_data_hora(self):
+        data_hora = self.cleaned_data['data_hora']
+
+        if data_hora <= timezone.now() + timedelta(hours=2):
+            self.s = "A data e hora precisam ser, ao menos, duas horas a partir de agora."
+            raise forms.ValidationError(self.s)
+        
+        if data_hora >= timezone.now() + timedelta(weeks=2):
+            self.s = 'A carona deve ser criada com, no máximo, duas semanas de antecedência.'
+            raise forms.ValidationError(self.s)
+        return data_hora
 
 class ConfirmacaoCancelamentoForm(forms.Form):
     confirmar = forms.BooleanField(label = 'Confirmo o cancelamento', required=True)

@@ -73,6 +73,7 @@ def cadastrar_veiculo(request):
     return render(request, 'mysite/veiculo.html', {'form': form})
 
 def home(request):
+    # print(Carona.objects.values())
     return render(request, 'mysite/home.html')
 
 from django.contrib.auth.hashers import check_password
@@ -183,8 +184,7 @@ def criar_carona(request):
     cpf = request.session['cpf']
     try: veiculo = Veiculo.objects.get(cpf_motorista = cpf)
     except Veiculo.DoesNotExist: return HttpResponse("Veículo não cadastrado")
-    
-    
+        
     if request.method == 'POST':
         form = CaronaForm(request.POST)
         if form.is_valid():
@@ -193,10 +193,7 @@ def criar_carona(request):
             destino = form.cleaned_data['destino']
             data_hora = form.cleaned_data['data_hora']
 
-            # pensar em como validar entradas
-
             carona = Carona()
-            # carona.cpf_motorista = cpf
             carona.cpf_motorista = Usuario.objects.get(cpf=cpf)
             carona.quantidade = qtd
             carona.veiculo = veiculo
@@ -204,13 +201,9 @@ def criar_carona(request):
             carona.destino = destino
             carona.data_hora = data_hora
             
-            # respostas temporárias, vou melhorar quando fazer as validações da entrada, mude para true se quiser testar
-            if False: return HttpResponse('Ponto de encontro inválido')
-            if False: return HttpResponse('Pondo de destino inválido')
-            if False: return HttpResponse('Data inválida')
-
             carona.save()
             return HttpResponse("Carona criada com sucesso")
+        else: return HttpResponse(form.s)
 
     return render(request, 'mysite/criarcarona.html', {'form':CaronaForm()})
 
