@@ -1,68 +1,67 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Cadastro de Usuário</title>
-    {% load static %}
+{% extends 'mysite/base.html' %}
+{% load static %}
+
+{% block title %}Cadastro & Login{% endblock %}
+
+{% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-</head>
-<body>
-	<div class="container" id="container">
-        <div class="form-container sign-up-container" id="signup-form">
-            <form method="post" id="usuarioForm">
-                {% csrf_token %}
-                <h2>Cadastro</h2>
+{% endblock %}
 
-                <!-- Renderiza o formulário -->
-                {{ form.as_p }}
-                <!-- Botão de envio -->
-                <button class="button" id="nextToComplete">Registrar</button>
-            </form>
-        </div>
-		<div class="form-container sign-in-container">
-			<form method="post" action="{% url 'login' %}">
-				{% csrf_token %}
-				<h2>Login</h2>
+{% block content %}
+	<main>
+		<div class="container" id="container">
+			<div class="form-container sign-up-container" id="signup-form">
+				<form method="post" id="usuarioForm">
+					{% csrf_token %}
+					<h2>Cadastro</h2>
 
-				<!-- Renderiza o formulário -->
-				{{ form.as_p }}
+					<!-- Renderiza o formulário -->
+					{{ form.as_p }}
+					<!-- Botão de envio -->
+					<button class="button" id="nextToComplete">Registrar</button>
+				</form>
+			</div>
+			<div class="form-container sign-in-container">
+				<form method="post" action="{% url 'login' %}">
+					{% csrf_token %}
+					<h2>Login</h2>
 
-				<!-- Botão de envio -->
-				<button type="submit">Entrar</button>
-			</form>
-		</div>
-		<div class="overlay-container">
-			<div class="overlay">
-				<div class="overlay-panel overlay-left">
-					<h1>Entre em sua conta!</h1>
-					<p>Preencha seus dados para entrar!</p>
-					<button class="ghost" id="signIn">Entrar</button>
-				</div>
-				<div class="overlay-panel overlay-right">
-					<h1>Crie sua conta!</h1>
-					<p>Inicie essa jornada com a gente!</p>
-					<button class="ghost" id="signUp">Registrar</button>
+					<!-- Renderiza o formulário -->
+					{{ form.as_p }}
+
+					<!-- Botão de envio -->
+					<button type="submit">Entrar</button>
+				</form>
+			</div>
+			<div class="overlay-container">
+				<div class="overlay">
+					<div class="overlay-panel overlay-left">
+						<h1>Entre em sua conta!</h1>
+						<p>Preencha seus dados para entrar!</p>
+						<button class="ghost" id="signIn">Entrar</button>
+					</div>
+					<div class="overlay-panel overlay-right">
+						<h1>Crie sua conta!</h1>
+						<p>Inicie essa jornada com a gente!</p>
+						<button class="ghost" id="signUp">Registrar</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-    <script>
-        const signUpButton = document.getElementById('signUp');
-        const signInButton = document.getElementById('signIn');
-        const container = document.getElementById('container');
+		<script>
+			const signUpButton = document.getElementById('signUp');
+			const signInButton = document.getElementById('signIn');
+			const container = document.getElementById('container');
 
-        signUpButton.addEventListener('click', () => {
-            container.classList.add("right-panel-active");
-        });
+			signUpButton.addEventListener('click', () => {
+				container.classList.add("right-panel-active");
+			});
 
-        signInButton.addEventListener('click', () => {
-            container.classList.remove("right-panel-active");
-        });
+			signInButton.addEventListener('click', () => {
+				container.classList.remove("right-panel-active");
+			});
 
-	</script>
-</body>
-</html>
+		</script>
+    </main>
+{% endblock %}
