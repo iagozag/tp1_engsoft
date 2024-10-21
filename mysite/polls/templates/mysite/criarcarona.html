@@ -1,20 +1,20 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-3">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Carona</title>
-  </head>
-  <body>
+{% extends 'mysite/base.html' %}
+{% load static %}
+
+{% block title %}Criar Carona{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/criarcarona.css' %}">
+{% endblock %}
+
+{% block content %}
     <main>
-        <h1>Informações da carona: </h1>
-        
+        <h2>Informações da carona:</h2>
         <form method="post">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit">Adicionar carona</button>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Adicionar carona</button>
         </form>
     </main>
-  </body>
-</html>
+{% endblock %}
 

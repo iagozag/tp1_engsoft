@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}caronasUFMG{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+	<header>
+		<nav class="navbar">
+			<ul class="nav-left">
+				<li>
+					<a href="{% url 'home' %}">
+						<img src="{% static 'images/iconcasa.png' %}" alt="Home" class="nav-icon">
+						Página Principal
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'criar_carona' %}">
+						<img src="{% static 'images/iconoferecer.png' %}" alt="Oferecer Carona" class="nav-icon">
+						Oferecer Carona
+					</a>
+				</li>
+			</ul>
+			<ul class="nav-right">
+				<li>
+					<a href="{% url 'cadastrar_usuario' %}">
+						<img src="{% static 'images/iconlogin.png' %}" alt="Login" class="nav-icon">
+						Cadastro & Login
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
+
