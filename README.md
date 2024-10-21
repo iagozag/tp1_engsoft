@@ -59,7 +59,7 @@
 
 ## <h3 align="center"> Backlog da sprint <h3>
 
-## <h4> 1: como usuário, quero oferecer uma carona <h4>
+## <h4> 1: como usuário, quero realizar cadastro, login, atualizar dados e deletar <h4>
 
 1.1) Banco de dados e realizar cadastro (Back-End, Caroline)
 
