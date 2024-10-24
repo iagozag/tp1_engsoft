@@ -12,35 +12,35 @@
 		<h2> Caronas Oferecidas</h2>
 
 		{% if caronas %}
-			<table border = "1">
-				<tr>
-					<th>ID</th>
-					<th>Quantidade</th>
-					<th>Veículo</th>
-					<th>Ponto de Encontro</th>
-					<th>Destino</th>
-					<th>Data e Hora</th>
-					<th>Ações</th>
-				</tr>
-				{% for carona in caronas %}
+			<div class="table-container">
+				<table border = "1">
 					<tr>
-						<td>{{carona.id}}</td>
-						<td>{{carona.quantidade}}</td>
-						<td>{{carona.veiculo}}</th>
-						<td>{{carona.ponto_encontro}}</th>
-						<td>{{carona.destino}}</th>
-						<td>{{carona.data_hora}}</th>
-						<td>
-							<a href="{% url 'editar_carona' carona.id %}">Editar</a> |
-							<a href="{% url 'cancelar_carona' carona.id%}">Cancelar</a>
-						</td>
+						<th>Vagas</th>
+						<th>Veículo</th>
+						<th>Ponto de Encontro</th>
+						<th>Destino</th>
+						<th>Data e Hora</th>
+						<th>Ações</th>
 					</tr>
-				{% endfor %}
-			</table>
+					{% for carona in caronas %}
+						<tr>
+							<td>{{carona.quantidade}}</td>
+							<td>{{carona.veiculo}}</th>
+							<td>{{carona.ponto_encontro}}</th>
+							<td>{{carona.destino}}</th>
+							<td>{{carona.data_hora}}</th>
+							<td>
+								<a href="{% url 'editar_carona' carona.id %}">Editar</a> |
+								<a href="{% url 'cancelar_carona' carona.id%}">Cancelar</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</table>
+			</div>
 		{% else %}
 			<p> Você não tem nenhuma carona oferecida no momento :).</p>
 		{% endif %}
 
-		<a href="{% url 'home' %}">Voltar para página inicial</a>
+		<a href="{% url 'home' %}">&#8592; Página Principal</a>
     </main>
 {% endblock %}

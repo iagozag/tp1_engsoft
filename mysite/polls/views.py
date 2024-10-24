@@ -55,7 +55,7 @@ def completar_cadastro(request):
 
 def cadastrar_veiculo(request):
     if 'cpf' not in request.session:
-        return redirect('cadastrar_usuario')
+        return redirect('login')
 
     if request.method == 'POST':
         form = VeiculoForm(request.POST)
@@ -65,7 +65,6 @@ def cadastrar_veiculo(request):
             usuario = Usuario.objects.get(cpf=cpf_usuario)
             veiculo.cpf_motorista = usuario
             veiculo.save()
-            del request.session['cpf']
             return redirect('home')  # Redireciona para a página inicial ou outra página de sucesso
     else:
         form = VeiculoForm()

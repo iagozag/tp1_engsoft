@@ -77,4 +77,4 @@ class CaronaForm(forms.Form):
         return data_hora
 
 class ConfirmacaoCancelamentoForm(forms.Form):
-    confirmar = forms.BooleanField(label = 'Confirmo o cancelamento', required=True)
+    confirmar = forms.BooleanField(label = 'Você tem certeza que deseja cancelar essa carona?', required=True, widget = forms.HiddenInput())
