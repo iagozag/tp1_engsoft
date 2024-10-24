@@ -30,5 +30,5 @@ urlpatterns = [
     path('visualizar_caronas/', views.visualizar_caronas, name='visualizar_caronas'),
     path('editar_carona/<int:carona_id>/', views.editar_carona, name='editar_carona'),
     path('cancelar_carona/<int:carona_id>/', views.cancelar_carona, name='cancelar_carona'),
-
+    path('motorista', views.visualizar_caronas, name='visualizar_caronas'),
 ]

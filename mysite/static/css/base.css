@@ -157,3 +157,25 @@ input {
     padding-top: 70px;
 }
 
+.dropbtn{
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	margin-top: -5px;
+}
+.dropdown{
+	position: relative;
+
+}
+
+.dropdown-content{
+	display: none;
+}
+
+.dropdown:hover .dropdown-content{
+	display: block;
+}
+
+.dropdown-content a{
+	display: block;
+}
