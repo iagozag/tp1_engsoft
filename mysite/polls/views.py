@@ -239,17 +239,10 @@ def editar_carona(request, carona_id):
     
     return render(request, 'mysite/editar_carona.html', {'form': form, 'carona': carona})
 
-
 def cancelar_carona(request, carona_id):
     carona = get_object_or_404(Carona, id=carona_id)
 
     if request.method == 'POST':
-        form = ConfirmacaoCancelamentoForm(request.POST)
-        if form.is_valid() and form.cleaned_data['confirmar']:
-            carona.delete()
-            return redirect('visualizar_caronas')
-    else:
-            form = ConfirmacaoCancelamentoForm()
+        carona.delete()
+        return redirect('visualizar_caronas')
 
-
-    return render(request, 'mysite/cancelar_carona.html', {'carona': carona, 'form':form})

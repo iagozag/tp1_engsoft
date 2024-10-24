@@ -31,7 +31,7 @@
 							<td>{{carona.data_hora}}</th>
 							<td>
 								<a href="{% url 'editar_carona' carona.id %}">Editar</a> |
-								<a href="{% url 'cancelar_carona' carona.id%}">Cancelar</a>
+							    <a href="#" onclick="showPopup({{carona.id}})">Excluir</a>	
 							</td>
 						</tr>
 					{% endfor %}
@@ -42,5 +42,30 @@
 		{% endif %}
 
 		<a href="{% url 'home' %}">&#8592; Página Principal</a>
-    </main>
+
+		<div id="confirmationPopup" class="popup" style="display:none;">
+			<div class="popup-content">
+				<p>Deseja confirmar a exclusão?</p>
+				<form id="deleteForm" method="POST" action="">
+					{% csrf_token %}
+					<button type="submit">Excluir</button>
+					<button type="button" onclick="closePopup()">Cancelar</button>
+				</form>
+			</div>
+		</div>
+
+	<script>
+		function showPopup(caronaId) {
+			caronaIdToDelete = caronaId;
+			const form = document.getElementById("deleteForm");
+			form.action = `/cancelar_carona/${caronaId}/`;
+			document.getElementById("confirmationPopup").style.display = "block";
+		}
+
+		function closePopup() {
+			document.getElementById("confirmationPopup").style.display = "none";
+		}
+	</script>
+
+	</main>
 {% endblock %}
