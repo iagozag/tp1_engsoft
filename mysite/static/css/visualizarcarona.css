@@ -36,6 +36,26 @@ form {
     text-align: center;
 }
 
+.popup {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    z-index: 1;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    margin: 15% auto;
+    text-align: center;
+}
+
 button {
     margin-top: 30px;
     border-radius: 20px;
