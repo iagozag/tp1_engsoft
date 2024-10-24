@@ -18,9 +18,20 @@
 					<!-- Renderiza o formulário -->
 					{{ form.as_p }}
 					<!-- Botão de envio -->
-					<button class="button" id="nextToComplete">Registrar</button>
+				 <button type="button" class="button" id="nextToComplete">Registrar</button>	
 				</form>
 			</div>
+
+			<div class="form-container sign-up-container" id="completaForm" style="display: none;">
+				<form method="post" id="completaCadastroForm">
+					{% csrf_token %}
+					<h2>Complete seu cadastro</h2>
+
+					{{ completa_form.as_p }}
+					<button type="button" class="button" id="completeRegister">Completar Cadastro</button>
+				</form>
+			</div>
+
 			<div class="form-container sign-in-container">
 				<form method="post" action="{% url 'login' %}">
 					{% csrf_token %}
@@ -62,6 +73,50 @@
 				container.classList.remove("right-panel-active");
 			});
 
+			document.getElementById('nextToComplete').addEventListener('click', function() {
+				const formData = new FormData(document.getElementById('usuarioForm'));
+
+				fetch("{% url 'cadastrar_usuario' %}", {
+					method: 'POST',
+					body: formData,
+					headers: {
+						'X-CSRFToken': '{{ csrf_token }}',
+					},
+				})
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						// Esconder o formulário de usuário
+						document.getElementById('signup-form').style.display = 'none';
+						// Mostrar o formulário de complementação
+						document.getElementById('completaForm').style.display = 'block';
+					} else {
+						alert(data.error);
+					}
+				})
+				.catch(error => console.error('Error:', error));
+			});
+
+			document.getElementById('completeRegister').addEventListener('click', function() {
+				const formData = new FormData(document.getElementById('completaCadastroForm'));
+
+				fetch("{% url 'completa' %}", {
+					method: 'POST',
+					body: formData,
+					headers: {
+						'X-CSRFToken': '{{ csrf_token }}',
+					},
+				})
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						window.location.href = "{% url 'home' %}";
+					} else {
+						alert(data.error);
+					}
+				})
+				.catch(error => console.error('Error:', error));
+			});
 		</script>
-    </main>
+	</main>
 {% endblock %}

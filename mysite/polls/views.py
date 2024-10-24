@@ -10,6 +10,7 @@ from .models import Usuario, Veiculo, Carona
 from .forms import LoginForm, NomeForm, SenhaForm, DataForm, EmailForm, TelefoneForm, DeletaForm, CaronaForm
 from django.contrib.auth import logout
 from .forms import ConfirmacaoCancelamentoForm
+from django.http import JsonResponse
 
 def cadastrar_usuario(request):
     if request.method == 'POST':
@@ -17,13 +18,14 @@ def cadastrar_usuario(request):
         if form.is_valid():
             request.session['email'] = form.cleaned_data['email']
             request.session['senha'] = form.cleaned_data['senha']
-
-            return redirect('completa')  # Redireciona para a página inicial ou outra página de sucesso
-  # Redireciona para a página inicial ou outra página de sucesso
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'error': form.errors})
     else:
         form = UsuarioForm()
+        completa_form = CompletaForm()  # Adicionei isso aqui para o segundo formulário
 
-    return render(request, 'mysite/cadastro.html', {'form': form})
+    return render(request, 'mysite/cadastro.html', {'form': form, 'completa_form': completa_form})
 
 def completar_cadastro(request):
     if request.method == 'POST':
@@ -31,7 +33,7 @@ def completar_cadastro(request):
         if form.is_valid():
             email_usuario = request.session.get('email')
             senha_usuario = request.session.get('senha')
-            usuario = form.save(commit = False)  # Salva no banco de dados SQLite
+            usuario = form.save(commit=False)
             usuario.email = email_usuario
             usuario.senha = senha_usuario
             usuario.save()
@@ -43,13 +45,12 @@ def completar_cadastro(request):
 
             e_motorista = form.cleaned_data['e_motorista']
             if e_motorista:
-                request.session['usuario'] = form.cleaned_data
-                return redirect('veiculo')
-            
-            return redirect('home')  
-    else:
-        form = CompletaForm()
+                return JsonResponse({'success': True, 'redirect': 'veiculo'})
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'error': form.errors})
 
+    form = CompletaForm()
     return render(request, 'mysite/completa.html', {'form': form})
 
 
