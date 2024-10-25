@@ -27,12 +27,21 @@
 				</div>
 			</ul>
 			<ul class="nav-right">
-				<li>
-					<a href="{% url 'cadastrar_usuario' %}">
-						<img src="{% static 'images/iconlogin.png' %}" alt="Login" class="nav-icon">
-						Cadastro & Login
-					</a>
-				</li>
+				{% if request.session.cpf %}
+					<li>
+					    <a href="{% url 'logout' %}">
+							<img src="{% static 'images/iconlogin.png' %}" alt="Login" class="nav-icon">
+							Logout
+						</a>
+					</li>
+				{% else %}
+					<li>
+						<a href="{% url 'cadastrar_usuario' %}">
+							<img src="{% static 'images/iconlogin.png' %}" alt="Login" class="nav-icon">
+							Cadastro & Login
+						</a>
+					</li>
+				{% endif%}
 			</ul>
 		</nav>
 	</header>

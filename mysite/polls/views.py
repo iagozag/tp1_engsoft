@@ -102,6 +102,13 @@ def login_usuario(request):
 
     return render(request, 'mysite/login.html', {'form': form})
 
+def logout_usuario(request):
+    try:
+        del request.session['cpf']
+    except KeyError:
+        pass
+    return redirect('home')
+
 
 def configuracoes(request):
     if 'cpf' not in request.session: return redirect('cadastrar_usuario')
