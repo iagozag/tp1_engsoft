@@ -115,45 +115,63 @@ def configuracoes(request):
     
     cpf = request.session['cpf']
 
-    d = {'formnome' : NomeForm(),
-         'formdata' : DataForm(),
-         'formtel'  : TelefoneForm(),
-         'formsen'  : SenhaForm(),
-         'formemail': EmailForm(),
-         'formdel'  : DeletaForm()
+    motorista = Veiculo.objects.filter(cpf_motorista=cpf).exists()
+    
+    usuario = Usuario.objects.get(cpf=cpf)
+
+    d = {'formnome'     : NomeForm(),
+         'formdata'     : DataForm(),
+         'formtel'      : TelefoneForm(),
+         'formsen'      : SenhaForm(),
+         'formemail'    : EmailForm(),
+         'formdel'      : DeletaForm(),
+         'eh_motorista' : motorista,
+         'nome'         : usuario.nome,
+         'data'         : datetime.strptime(usuario.data_nascimento,"%d/%m/%Y").strftime("%d/%m/%Y"),
+         'tel'          : usuario.telefone,
+         'email'        : usuario.email
         }
     
     if request.method == 'POST':
+        formData = DataForm(request.POST)
+        formNome = NomeForm(request.POST)
+        formTel = TelefoneForm(request.POST)
+        alterou = False
+
         if 'cadastra' in request.POST: return redirect('veiculo')
         
         if 'descadastra_veiculo' in request.POST:
             Veiculo.objects.filter(cpf_motorista = cpf).delete()
-            return redirect('login')
+            return HttpResponse('Veĩculo descadastrado com sucesso')
 
-        formNome = NomeForm(request.POST)
-        if formNome.is_valid():
-            novoNome = formNome.cleaned_data['nome']
-            user = Usuario.objects.get(cpf=cpf)
-            user.nome = novoNome
-            user.save()
-            return render(request, 'mysite/configuracoes.html',d)
+        if formNome.has_changed():
+            if formNome.is_valid():
+                print('nome')
+                alterou = True
+                novoNome = formNome.cleaned_data['nome']
+                user = Usuario.objects.get(cpf=cpf)
+                user.nome = novoNome
+                user.save()
 
+        if formData.has_changed():
+            if formData.is_valid():
+                print('data')
+                alterou = True
+                novaData = formData.cleaned_data['data']
+                user = Usuario.objects.get(cpf=cpf)
+                user.data_nascimento = novaData
+                user.save()
+            else: return HttpResponse(formData.s)
 
-        formData = DataForm(request.POST)
-        if formData.is_valid():
-            novaData = formData.cleaned_data['data']
-            user = Usuario.objects.get(cpf=cpf)
-            user.data_nascimento = novaData
-            user.save()
-            return render(request, 'mysite/configuracoes.html',d)
-
-        formTel = TelefoneForm(request.POST)
-        if formTel.is_valid():
-            novoTel = formTel.cleaned_data['telefone']
-            user = Usuario.objects.get(cpf=cpf)
-            user.telefone = novoTel
-            user.save()
-            return render(request, 'mysite/configuracoes.html',d)
+        if formTel.has_changed() :
+            if formTel.is_valid():
+                print('tel')
+                alterou = True
+                novoTel = formTel.cleaned_data['telefone']
+                user = Usuario.objects.get(cpf=cpf)
+                user.telefone = novoTel
+                user.save()
+        if alterou: return HttpResponse("informações atualizadas com sucesso")
 
         formSenha = SenhaForm(request.POST)
         if formSenha.is_valid():
@@ -162,7 +180,7 @@ def configuracoes(request):
             if senhaAtual!=user.senha: return HttpResponse("Senha incorreta!")
             user.senha = novaSenha
             user.save()
-            return render(request, 'mysite/configuracoes.html',d)
+            return HttpResponse('Senha alterada com sucesso')
 
         formEmail = EmailForm(request.POST)
         if formEmail.is_valid():
@@ -170,7 +188,7 @@ def configuracoes(request):
             user = Usuario.objects.get(cpf=cpf)
             user.email = email
             user.save()
-            return render(request, 'mysite/configuracoes.html',d)
+            return HttpResponse('Email alterado com sucesso')
 
         formDel = DeletaForm(request.POST)
         if formDel.is_valid():
@@ -180,10 +198,9 @@ def configuracoes(request):
             logout(request)
             user.delete()
             return redirect('cadastrar_usuario')
-
+            
 
     return render(request, 'mysite/configuracoes.html',d)
-
 
 def criar_carona(request):
     if 'cpf' not in request.session: return redirect('cadastrar_usuario')
