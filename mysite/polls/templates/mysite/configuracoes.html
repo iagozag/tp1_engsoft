@@ -1,63 +1,74 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurações</title>
-  </head>
-  <body>
-    <main>
-        <h1>Sua conta</h1>
+{% extends 'mysite/base.html' %}
+{% load static %}
+
+{% block title %}configuracoes{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/configuracoes.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <h2>Sua conta</h2>
+    <form method="post" class="form-alteracoes1 fform" >
+        {% csrf_token %}
+        <div class = "alteracoes1">
+            <div class="nome">
+                <h4>Alterar seu nome</h4>
+                <h5>Nome: {{ nome }} </h5>
+                {{ formnome.as_p }}
+            </div>
+
+            <div class="data">
+                <h4>Alterar sua data de nascimento</h4>
+                <h5>Data de nascimento: {{ data }} </h5>
+                {{ formdata.as_p }}
+            </div>
+            
+            <div class="numero">
+                <h4>Alterar seu número de telefone</h4>
+                <h5>Número atual: {{ tel }}</h5>
+                {{ formtel.as_p }}
+            </div>
+        </div>
+        <button type="submit">Alterar informações</button>
+    </form>
+    
+    <div class = "alteracoes2">
+        <form method="post" class="email fform">
+            {% csrf_token %}
+            <h4>Alterar seu e-mail</h4>
+            <h5>E-mail atual: {{ email }}</h5>
+            {{ formemail.as_p }}
+            <button type="submit">Alterar e-mail</button>
+        </form>
         
-        <form method="post">
-          {% csrf_token %}
-          <h4>Alterar seu nome</h4>
-          {{ formnome.as_p }}
-          <button type="submit" name="bnome">Alterar</button>
+        <form method="post" class="senha fform">
+            {% csrf_token %}
+            <h4>Alterar sua senha</h4>
+            {{ formsen.as_p }}
+            <button type="submit" class="bsenha fform">Alterar senha</button>
         </form>
-
-        <form method="post">
-          {% csrf_token %}
-          <h4>Alterar sua data de nascimento</h4>
-          {{ formdata.as_p }}
-          <button type="submit" name="bdata">Alterar</button>
+        
+        <form method="post" class="deleta fform">
+            {% csrf_token %}
+            <h4>Excluir sua conta</h4>
+            {{ formdel.as_p }}
+            <button type="submit" name="bdel">Confirmar exclusão</button>
         </form>
+    </div>
+        
 
-        <form method="post">
-          {% csrf_token %}
-          <h4>Alterar seu número de telefone</h4>
-          {{ formtel.as_p }}
-          <button type="submit" name="btel">Alterar</button>
+    <div class = "div-deleta-cadastra">
+        <form method="post" class="form-deleta-cadastra fform">
+            {% csrf_token %}
+            {% if eh_motorista %}
+            <button name = "descadastra_veiculo">Descadastrar um veiculo</button>
+            {% else %}
+            <button name = "cadastra">Cadastrar um veículo</button>
+            {% endif %}
         </form>
-
-        <form method="post">
-          {% csrf_token %}
-          <h4>Alterar seu e-mail</h4>
-          {{ formemail.as_p }}
-          <button type="submit" name="bemail">Alterar</button>
-        </form>
-
-        <form method="post">
-          {% csrf_token %}
-          <h4>Alterar sua senha</h4>
-          {{ formsen.as_p }}
-          <button type="submit" name="bsenha">Alterar</button>
-        </form>
-
-        <form method="post">
-          {% csrf_token %}
-          <h4>Excluir sua conta</h4>
-          {{ formdel.as_p }}
-          <button type="submit" name="bdel">Excluir</button>
-        </form>  
-          <div style="display: flex;">
-                <button name = "cadastra">Cadastrar um veículo</button>
-              <div style="left: 5%; position: relative;">
-                <button name = "descadastra_veiculo">Descadastrar um veiculo</button>
-              </div>
-          </div>
-        </form>
-    </main>
-  </body>
-</html>
-
+    </div>
+</main>
+    
+{% endblock %}
