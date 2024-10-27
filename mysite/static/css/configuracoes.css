@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400.800');
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    background: #f6f5f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+    margin: -20px 0 50px;
+}
+
+h2 {
+    font-size: 25px;
+    color: black;
+}
+
+main {
+    font-family: 'Montserrat', sans-serif;
+    background-color:#fff;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+    0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 10px;
+    margin-top: 40px;
+    position: relative;
+}
+
+.form-alteracoes1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.alteracoes1 {
+    padding: 0 50px;
+    justify-content:center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.nome, .data, .numero, .email, .senha, .deleta {
+    width: 350px;
+    margin: 10px;
+}
+
+.data {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.alteracoes2 {
+    padding-top: 10px;
+    justify-content:center;
+    position: relative;
+    display: flex;
+    margin: 20px;
+    vertical-align: top;
+    flex-direction: row;
+}
