@@ -11,6 +11,7 @@ from .forms import LoginForm, NomeForm, SenhaForm, DataForm, EmailForm, Telefone
 from django.contrib.auth import logout
 from .forms import ConfirmacaoCancelamentoForm
 from django.http import JsonResponse
+from datetime import datetime
 
 def cadastrar_usuario(request):
     if request.method == 'POST':
