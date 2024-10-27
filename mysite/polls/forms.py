@@ -2,7 +2,7 @@ from django import forms
 from .models import Usuario
 from .models import Veiculo
 from django.utils import timezone
-from datetime import timedelta
+from datetime import timedelta, date
 
 class UsuarioForm(forms.ModelForm):
     senha = forms.CharField(widget=forms.PasswordInput)
@@ -31,23 +31,40 @@ class LoginForm(forms.Form):
     senha = forms.CharField(widget=forms.PasswordInput)
 
 class NomeForm(forms.Form):
-    nome = forms.CharField(label = 'Nome' ,max_length=100)
+    nome = forms.CharField(label = 'Novo nome' ,max_length=100,required=False)
 
 class DataForm(forms.Form):
-    data = forms.CharField(label = 'Data de nascimento' ,max_length=100)
+    data = forms.DateField(
+        input_formats=['%d/%m/%Y'],
+        label = 'Nova data de nascimento',
+        widget=forms.DateInput(
+            attrs={'type' : 'date', 'placeholder': 'dd/mm/yyyy'},
+            format='%d/%m/%Y'),
+        required=False
+    )
+    
+
+    def clean_data(self):
+        d = self.cleaned_data['data']
+        max = date.today() - timedelta(days=13*365)
+
+        if d > max:
+            self.s = 'Você deve ter ao menos 13 anos para utilizar o sistema'
+            raise forms.ValidationError(self.s)
+        else: return d
 
 class TelefoneForm(forms.Form):
-    telefone = forms.CharField(label = 'Novo número de telefone' ,max_length=15)
+    telefone = forms.CharField(label = 'Novo número de telefone' ,max_length=15,required=False)
 
 class SenhaForm(forms.Form):
-    senhaAtual = forms.CharField(label = 'Digite sua senha' ,max_length=128)
-    novaSenha = forms.CharField(label = 'Digite sua nova senha', max_length=128)
+    senhaAtual = forms.CharField(label = 'Digite sua senha atual' ,max_length=128,required=True)
+    novaSenha = forms.CharField(label = 'Digite sua nova senha', max_length=128,required=True)
 
 class EmailForm(forms.Form):
-    email = forms.EmailField(label = 'Digite o novo e-mail', max_length=50)
+    email = forms.EmailField(label = 'Digite o novo e-mail', max_length=50,required=True)
 
 class DeletaForm(forms.Form):
-    senha = forms.CharField(label = 'Confirme a sua senha', max_length=128)
+    senha = forms.CharField(label = 'Confirme a sua senha', max_length=128,required=True)
 
 class CaronaForm(forms.Form):
     escolhas = [(1,'1'),
