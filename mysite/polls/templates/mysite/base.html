@@ -20,11 +20,13 @@
 				</li>
 			</ul>
 			<ul class="dropdown">
+				{%if request.session.cpf%}
 				<button class="dropbtn">Motorista</button>
 				<div class="dropdown-content">
 					<a href="{% url 'criar_carona' %}">Oferecer Carona</a>
 					<a href="{% url 'visualizar_caronas' %}">Visualizar Caronas</a>
 				</div>
+				{%endif%}
 			</ul>
 			<ul class="nav-right">
 				{% if request.session.cpf %}
