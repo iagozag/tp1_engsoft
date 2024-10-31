@@ -24,54 +24,61 @@ def cadastrar_usuario(request):
             return JsonResponse({'success': False, 'error': form.errors})
     else:
         form = UsuarioForm()
-        completa_form = CompletaForm()  # Adicionei isso aqui para o segundo formulário
+        completa_form = CompletaForm()
+        veiculo_form = VeiculoForm()
 
-    return render(request, 'mysite/cadastro.html', {'form': form, 'completa_form': completa_form})
+    return render(request, 'mysite/cadastro.html', {'form': form, 'completa_form': completa_form, 'veiculo_form': veiculo_form})
 
 def completar_cadastro(request):
     if request.method == 'POST':
         form = CompletaForm(request.POST)
         if form.is_valid():
-            email_usuario = request.session.get('email')
-            senha_usuario = request.session.get('senha')
-            usuario = form.save(commit=False)
-            usuario.email = email_usuario
-            usuario.senha = senha_usuario
-            usuario.save()
-
-            request.session['cpf'] = usuario.cpf
-
-            del request.session['email']
-            del request.session['senha']
-
             e_motorista = form.cleaned_data['e_motorista']
+
+            request.session['cpf'] = form.cleaned_data['cpf']
+            request.session['nome'] = form.cleaned_data['nome']
+            request.session['data_nascimento'] = form.cleaned_data['data_nascimento']
+            request.session['telefone'] = form.cleaned_data['telefone']
+            
             if e_motorista:
                 return JsonResponse({'success': True, 'redirect': 'veiculo'})
+
+            usuario = Usuario(
+                cpf=request.session['cpf'],
+                email=request.session['email'],
+                senha=request.session['senha'],
+                data_nascimento=request.session['data_nascimento'],
+                telefone=request.session['telefone'],
+            )
+            usuario.save()
+            del request.session['email'], request.session['senha'], request.session['data_nascimento'], request.session['telefone']
             return JsonResponse({'success': True})
         else:
             return JsonResponse({'success': False, 'error': form.errors})
 
-    form = CompletaForm()
-    return render(request, 'mysite/completa.html', {'form': form})
-
-
 def cadastrar_veiculo(request):
-    if 'cpf' not in request.session:
-        return redirect('login')
-
     if request.method == 'POST':
         form = VeiculoForm(request.POST)
         if form.is_valid():
-            veiculo = form.save(commit = False)  # Salva no banco de dados SQLite
-            cpf_usuario = request.session['cpf']
-            usuario = Usuario.objects.get(cpf=cpf_usuario)
+            veiculo = form.save(commit=False)
+
+            usuario = Usuario(
+                cpf=request.session['cpf'],
+                email=request.session['email'],
+                senha=request.session['senha'],
+                data_nascimento=request.session['data_nascimento'],
+                telefone=request.session['telefone'],
+            )
+            usuario.save()
+
             veiculo.cpf_motorista = usuario
             veiculo.save()
-            return redirect('home')  # Redireciona para a página inicial ou outra página de sucesso
-    else:
-        form = VeiculoForm()
 
-    return render(request, 'mysite/veiculo.html', {'form': form})
+            del request.session['email'], request.session['senha'], request.session['data_nascimento'], request.session['telefone']
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'error': form.errors})
+
 
 def home(request):
     # print(Carona.objects.values())

@@ -22,13 +22,23 @@
 				</form>
 			</div>
 
-			<div class="form-container sign-up-container" id="completaForm" style="display: none;">
+			<div class="form-container sign-up-container" id="completaForm" style="background-color: #fff; display: none;">
 				<form method="post" id="completaCadastroForm">
 					{% csrf_token %}
 					<h2>Complete seu cadastro</h2>
 
 					{{ completa_form.as_p }}
 					<button type="button" class="button" id="completeRegister">Completar Cadastro</button>
+				</form>
+			</div>
+
+			<div class="form-container sign-up-container" id="veiculoForm" style="background-color: #fff; display: none;">
+				<form method="post" id="cadastraVeiculoForm">
+					{% csrf_token %}
+					<h2>Cadastre seu veiculo</h2>
+
+					{{ veiculo_form.as_p }}
+					<button type="button" class="button" id="cadastraVeiculo">Cadastrar veiculo</button>
 				</form>
 			</div>
 
@@ -86,10 +96,8 @@
 				.then(response => response.json())
 				.then(data => {
 					if (data.success) {
-						// Esconder o formulário de usuário
-						document.getElementById('signup-form').style.display = 'none';
-						// Mostrar o formulário de complementação
 						document.getElementById('completaForm').style.display = 'block';
+						document.getElementById('signup-form').style.display = 'none';
 					} else {
 						alert(data.error);
 					}
@@ -101,6 +109,28 @@
 				const formData = new FormData(document.getElementById('completaCadastroForm'));
 
 				fetch("{% url 'completa' %}", {
+					method: 'POST',
+					body: formData,
+					headers: {
+						'X-CSRFToken': '{{ csrf_token }}',
+					},
+				})
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						document.getElementById('veiculoForm').style.display = 'block';
+						document.getElementById('completaForm').style.display = 'none';
+					} else {
+						alert(data.error);
+					}
+				})
+				.catch(error => console.error('Error:', error));
+			});
+
+			document.getElementById('cadastraVeiculo').addEventListener('click', function() {
+				const formData = new FormData(document.getElementById('cadastraVeiculoForm'));
+
+				fetch("{% url 'veiculo' %}", {
 					method: 'POST',
 					body: formData,
 					headers: {
