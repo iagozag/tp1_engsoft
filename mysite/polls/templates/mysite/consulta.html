@@ -5,22 +5,37 @@
     <title>Consultar carona</title>
 </head>
 <body>
-    <h1>Consultar carona</h1>
 
-    <form method="get" action="{% url 'listar_caronas' %}">
-        <label for="destino">Destino:</label>
-        <input type="text" id="Destino" name="Destino">
-        
-        <label for="dia">Data :</label>
-        <input type="date" id="data" name="data">
-        
-        <button type="submit">Filtrar</button>
-    </form>
-
-    <ul>
-        {% for carona in caronas %}
-            <li>{{ carona.veiculo }} - {{ carona.ponto_encontro }} - {{ carona.destino }} em {{ carona.data_hora }}</li>
-        {% endfor %}
-    </ul>
 </body>
 </html>
+
+{% extends 'mysite/base.html' %}
+{% load static %}
+
+{% block title %}Busca de caronas{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/visualizarcarona.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+		<h1>Consultar carona</h1>
+
+		<form method="get" action="{% url 'listar_caronas' %}">
+			<label for="destino">Destino:</label>
+			<input type="text" id="Destino" name="Destino">
+			
+			<label for="dia">Data :</label>
+			<input type="date" id="data" name="data">
+			
+			<button type="submit">Filtrar</button>
+		</form>
+
+		<ul>
+			{% for carona in caronas %}
+				<li>{{ carona.veiculo }} - {{ carona.ponto_encontro }} - {{ carona.destino }} em {{ carona.data_hora }}</li>
+			{% endfor %}
+		</ul>
+	</main>
+{% endblock %}
