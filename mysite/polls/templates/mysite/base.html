@@ -39,12 +39,18 @@
 
 			<ul class="nav-right">
 				{% if request.session.cpf %}
-					<li>
-					    <a href="{% url 'logout' %}">
-							<img src="{% static 'images/iconlogin.png' %}" alt="Login" class="nav-icon">
-							Logout
-						</a>
-					</li>
+						<div class = "menu-item">
+							<img src="{% static 'images/user-circle.png' %}" alt="Menu" class="dropdown-img-btn">
+
+							<div class="dropdown-content">
+								<a href="{% url 'configuracoes' %}"> Conta </a> 
+								<a href="{% url 'logout' %}">
+									<img src="{% static 'images/iconlogin.png' %}" alt="Login" class="nav-icon">
+									Logout
+								</a>
+							</div>
+						</div>
+					
 				{% else %}
 					<li>
 						<a href="{% url 'cadastrar_usuario' %}">

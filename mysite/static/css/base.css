@@ -178,7 +178,7 @@ input {
 	display: none;
 	position: absolute;
 	background-color: #f9f9f9;
-	width: 200px;
+	width: 180px;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 	font-family: Georgia, 'Montserrat', Times, serif;
@@ -198,4 +198,30 @@ input {
 
 .dropdown-content a:hover {
 	background-color: #ddd; /* Cor do fundo quando o link é selecionado */
+}
+
+.dropdown-img-btn{
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+}
+
+.menu-item:hover .dropdown-content{
+	display: block;
+}
+
+.leftbar .menu-item{
+	position: relative;
+}
+.nav-right{
+	position: relative;
+	color: #333;
+}
+
+.nav-right:hover .dropdown-content{
+	left: -50px;
+	width: 150px;
+	display: block;
+	position: absolute;
+	font-family: 'Montserrat', sans-serif;
 }
