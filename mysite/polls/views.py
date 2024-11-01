@@ -278,3 +278,23 @@ def cancelar_carona(request, carona_id):
         carona.delete()
         return redirect('visualizar_caronas')
 
+def listar_caronas(request):
+    destino = request.GET.get('Destino')
+    data = request.GET.get('data')
+    caronas =  Carona.objects.none()
+    
+    print("Destino: ",destino)
+    print("Data: ",data)
+    
+    
+    if destino and data:
+        try:
+            data_formatado = datetime.strptime(data, '%Y-%m-%d').date()
+            caronas =  Carona.objects.all()
+            caronas = caronas.filter(destino__iexact = destino, data_hora__date=data_formatado)
+            print("caronas encontradas", caronas)
+        except ValueError:
+            pass
+        
+
+    return render(request, 'mysite/consulta.html', {'caronas':caronas})
