@@ -43,12 +43,13 @@
 							<img src="{% static 'images/user-circle.png' %}" alt="Menu" class="dropdown-img-btn">
 
 							<div class="dropdown-content">
-								<a href="{% url 'configuracoes' %}"> Conta </a> 
-								<a href="{% url 'logout' %}">
+								<a href="{% url 'configuracoes' %}" style="font-weight: normal; font-size: 17px; color: #333; text-decoration: none;"> Conta </a>
+								<a href="{% url 'logout' %}" style="font-weight: normal; font-size: 17px; color: #333; text-decoration: none;">
 									<img src="{% static 'images/login.png' %}" alt="Login" class="nav-icon">
 									Logout
 								</a>
 							</div>
+							
 						</div>
 					
 				{% else %}

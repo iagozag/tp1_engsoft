@@ -217,6 +217,7 @@ input {
 .nav-right{
 	position: relative;
 	color: #333;
+	font-weight: normal;
 }
 
 .nav-right:hover .dropdown-content{
@@ -225,4 +226,5 @@ input {
 	display: block;
 	position: absolute;
 	font-family: 'Montserrat', sans-serif;
+	font-weight: normal;
 }
