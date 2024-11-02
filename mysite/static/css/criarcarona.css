@@ -65,6 +65,13 @@ input {
     margin: 4px 0;
     width: 100%;
 }
+label {
+    font-family:'Montserrat', sans-serif; /* Altera a fonte para Arial */
+    font-size: 14px; /* Tamanho da fonte */
+    font-weight: normal; /* Texto em negrito */
+    margin-bottom: 10px; /* Espaçamento inferior */
+    display: block; /* Faz o label ocupar toda a linha */
+}
 
 main {
     background-color: #fff;
@@ -77,14 +84,17 @@ main {
 }
 
 .dropdown-content {
-    display: none; /* Esconde por padrão */
+    display: none; /* Oculta por padrão */
     position: absolute; /* Para que fique acima dos outros elementos */
     background-color: white; /* Fundo branco */
-    border: 1px solid #ccc; /* Borda cinza */
     border-radius: 5px; /* Cantos arredondados */
+    width: 100%; /* Largura total */
     max-height: 200px; /* Altura máxima */
     overflow-y: auto; /* Rolagem vertical */
     z-index: 1000; /* Garante que fique acima de outros elementos */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 .dropdown-content.show {
@@ -92,9 +102,9 @@ main {
 }
 
 .suggestion {
-    padding: 10px; /* Espaçamento interno */
+    padding: 10px 20px; /* Espaçamento interno */
     cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
-    border-bottom: 1px solid #e0e0e0; /* Borda entre as sugestões */
+    border-bottom: 1px solid #ccc; /* Borda entre as sugestões */
 }
 
 .suggestion:last-child {
@@ -104,4 +114,3 @@ main {
 .suggestion:hover {
     background-color: #f0f0f0; /* Cor ao passar o mouse */
 }
-

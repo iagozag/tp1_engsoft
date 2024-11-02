@@ -15,49 +15,68 @@
             <label for="quantidade">Passageiros:</label>
             {{ form.quantidade }}
             <label for="ponto-encontro">Ponto de Encontro:</label>
-            <input type="text" id="ponto-encontro" name="ponto_encontro" oninput="autocompleteAddress(this.id)">
-            <div id="ponto-encontro-sugestoes" class="sugestoes"></div>
+            <div class="dropdown" style="position: relative;">
+                <input type="text" id="ponto-encontro" name="ponto_encontro" oninput="autocompleteAddress(this.id)">
+                <ul id="ponto-encontro-sugestoes" class="dropdown-content"></ul>
+            </div>
 
             <label for="destino">Destino:</label>
-            <input type="text" id="destino" name="destino" oninput="autocompleteAddress(this.id)">
-            <div id="destino-sugestoes" class="sugestoes"></div>
+            <div class="dropdown" style="position: relative;">
+                <input type="text" id="destino" name="destino" oninput="autocompleteAddress(this.id)">
+                <ul id="destino-sugestoes" class="dropdown-content"></ul>
+            </div>
+
             <label for="data_hora">Data e Hora:</label>
-            {{form.data_hora }}
+            {{ form.data_hora }}
             <button type="submit">Adicionar carona</button>
         </form>
     </main>
 
     <script>
         function autocompleteAddress(inputId) {
-            let input = document.getElementById(inputId).value;
-            if (input.length < 3) return;
-            console.log("Buscando sugestões para:", input);
-            fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(input)}&country=BR&state=MG&apiKey=99a1b15864344a99850c4d67e9a9d4a7`)
-                .then(response => response.json())
-                .then(data => {
-                    let suggestionsContainer = document.getElementById(`${inputId}-sugestoes`);
-                    suggestionsContainer.innerHTML = "";  // Limpa sugestões antigas
-                    
-                    if (data.features.length === 0) {
-                        suggestionsContainer.innerHTML = "<li class='sugestao'>Nenhuma sugestão encontrada</li>";
-                        return;
-                    }
-    
-                    // Limitar a 3 sugestões e adicionar como <li>
-                    data.features.slice(0, 3).forEach(feature => {
-                        let suggestion = document.createElement("li");
-                        suggestion.classList.add("suggestion");
-                        suggestion.innerText = feature.properties.formatted;
-                        suggestion.onclick = function() {
-                            document.getElementById(inputId).value = feature.properties.formatted;
-                            suggestionsContainer.innerHTML = ""; // Limpa sugestões após a seleção
-                        };
-                        suggestionsContainer.appendChild(suggestion);
-                    });
-                })
-                .catch(error => console.log(error));
+    let input = document.getElementById(inputId).value;
+    if (input.length < 3) return;
+
+    fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(input)}&country=BR&state=MG&apiKey=99a1b15864344a99850c4d67e9a9d4a7`)
+        .then(response => response.json())
+        .then(data => {
+            let suggestionsContainer = document.getElementById(`${inputId}-sugestoes`);
+            suggestionsContainer.innerHTML = "";  // Limpa sugestões antigas
+
+            if (data.features.length === 0) {
+                suggestionsContainer.classList.remove("show");
+                return;
+            }
+
+            // Exibir o dropdown
+            suggestionsContainer.classList.add("show");
+
+            data.features.slice(0, 3).forEach(feature => {
+                let suggestion = document.createElement("li");
+                suggestion.classList.add("suggestion");
+                suggestion.innerText = feature.properties.formatted;
+                suggestion.onclick = function() {
+                    document.getElementById(inputId).value = feature.properties.formatted;
+                    suggestionsContainer.innerHTML = ""; // Limpa sugestões após a seleção
+                    suggestionsContainer.classList.remove("show"); // Esconde o dropdown após a seleção
+                };
+                suggestionsContainer.appendChild(suggestion);
+            });
+        })
+        .catch(error => console.log(error));
+}
+
+// Fecha o dropdown quando clica fora
+document.addEventListener('click', function(event) {
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+        const suggestionsContainer = dropdown.querySelector('.dropdown-content');
+        if (!dropdown.contains(event.target)) {
+            suggestionsContainer.classList.remove('show'); // Esconde o dropdown se o clique for fora
         }
+    });
+});
+
     </script>
     
 {% endblock %}
-
