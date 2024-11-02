@@ -210,6 +210,18 @@ def configuracoes(request):
 
     return render(request, 'mysite/configuracoes.html',d)
 
+import requests
+from requests.structures import CaseInsensitiveDict
+
+url = "https://api.geoapify.com/v1/geocode/autocomplete?text=Mosco&apiKey=643e0f44a71c43dd978997ddc8ce67ff"
+
+headers = CaseInsensitiveDict()
+headers["Accept"] = "application/json"
+
+resp = requests.get(url, headers=headers)
+
+print(resp.status_code)
+
 def criar_carona(request):
     if 'cpf' not in request.session: return redirect('cadastrar_usuario')
     

@@ -75,3 +75,33 @@ main {
     max-width: 500px;
     width: 100%;
 }
+
+.dropdown-content {
+    display: none; /* Esconde por padrão */
+    position: absolute; /* Para que fique acima dos outros elementos */
+    background-color: white; /* Fundo branco */
+    border: 1px solid #ccc; /* Borda cinza */
+    border-radius: 5px; /* Cantos arredondados */
+    max-height: 200px; /* Altura máxima */
+    overflow-y: auto; /* Rolagem vertical */
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+}
+
+.dropdown-content.show {
+    display: block; /* Mostra o dropdown quando necessário */
+}
+
+.suggestion {
+    padding: 10px; /* Espaçamento interno */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+    border-bottom: 1px solid #e0e0e0; /* Borda entre as sugestões */
+}
+
+.suggestion:last-child {
+    border-bottom: none; /* Remove a borda da última sugestão */
+}
+
+.suggestion:hover {
+    background-color: #f0f0f0; /* Cor ao passar o mouse */
+}
+
