@@ -1,11 +1,12 @@
 from django.db import models
+from cpf_field.models import CPFField
 
 # Create your models here.
 class Usuario(models.Model):
     nome = models.CharField(max_length=100,default='')
-    cpf = models.CharField(max_length=11, primary_key=True)  # CPF único do usuário
+    cpf = CPFField(primary_key=True)  # CPF único do usuário
     email = models.EmailField(unique=True)  # Email único do usuário
-    data_nascimento = models.CharField(max_length=100)  # Data de nascimento do usuário
+    data_nascimento = models.DateField()  # Data de nascimento do usuário
     telefone = models.CharField(max_length=15, blank=True, null=True)  # Telefone do usuário
     avaliacao_media = models.FloatField(default=0)  # Média de avaliações
     senha = models.CharField(max_length=128)  # Senha do usuário (use hashing na prática)

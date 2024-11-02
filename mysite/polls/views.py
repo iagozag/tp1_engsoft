@@ -135,7 +135,7 @@ def configuracoes(request):
          'formdel'      : DeletaForm(),
          'eh_motorista' : motorista,
          'nome'         : usuario.nome,
-         'data'         : datetime.strptime(usuario.data_nascimento,"%d/%m/%Y").strftime("%d/%m/%Y"),
+         'data'         : usuario.data_nascimento,
          'tel'          : usuario.telefone,
          'email'        : usuario.email
         }

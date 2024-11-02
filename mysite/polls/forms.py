@@ -15,6 +15,9 @@ class CompletaForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ['nome', 'cpf', 'data_nascimento', 'telefone']
+        widgets = {
+            'data_nascimento': forms.DateInput(format='%d/%m/%Y', attrs={'type':'date','placeholder': 'dd/mm/yyyy'}),
+        }
 
     e_motorista = forms.BooleanField(
         required=False,
@@ -57,14 +60,27 @@ class TelefoneForm(forms.Form):
     telefone = forms.CharField(label = 'Novo número de telefone' ,max_length=15,required=False)
 
 class SenhaForm(forms.Form):
-    senhaAtual = forms.CharField(label = 'Digite sua senha atual' ,max_length=128,required=True)
-    novaSenha = forms.CharField(label = 'Digite sua nova senha', max_length=128,required=True)
+    senhaAtual = forms.CharField(
+        label = 'Digite sua senha atual',
+        max_length=128,required=True,
+        widget=forms.PasswordInput
+    )
+    novaSenha = forms.CharField(
+        label = 'Digite sua nova senha',
+        max_length=128,
+        required=True,
+        widget=forms.PasswordInput
+    )
 
 class EmailForm(forms.Form):
     email = forms.EmailField(label = 'Digite o novo e-mail', max_length=50,required=True)
 
 class DeletaForm(forms.Form):
-    senha = forms.CharField(label = 'Confirme a sua senha', max_length=128,required=True)
+    senha = forms.CharField(
+        label = 'Confirme a sua senha',
+        max_length=128,
+        required=True,
+        widget=forms.PasswordInput)
 
 class CaronaForm(forms.Form):
     escolhas = [(1,'1'),
