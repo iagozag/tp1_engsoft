@@ -277,6 +277,7 @@ def listar_caronas(request):
     destino = request.GET.get('Destino')
     data = request.GET.get('data')
     caronas =  Carona.objects.none()
+    consultado = False
     
     print("Destino: ",destino)
     print("Data: ",data)
@@ -284,6 +285,7 @@ def listar_caronas(request):
     
     if destino and data:
         try:
+            consultado = True
             data_formatado = datetime.strptime(data, '%Y-%m-%d').date()
             caronas =  Carona.objects.all()
             caronas = caronas.filter(destino__iexact = destino, data_hora__date=data_formatado)
@@ -292,4 +294,4 @@ def listar_caronas(request):
             pass
         
 
-    return render(request, 'mysite/consulta.html', {'caronas':caronas})
+    return render(request, 'mysite/consulta.html', {'caronas':caronas, 'consultado': consultado})

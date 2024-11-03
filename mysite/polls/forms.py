@@ -55,7 +55,9 @@ class DataForm(forms.Form):
         return d
 
 class TelefoneForm(forms.Form):
-    telefone = forms.CharField(label = 'Novo número de telefone' ,max_length=15,required=False)
+    telefone = forms.CharField(label = 'Novo número de telefone' ,
+                               max_length=15,
+                               required=True)
 
 class SenhaForm(forms.Form):
     senhaAtual = forms.CharField(

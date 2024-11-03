@@ -21,10 +21,39 @@
 			<button type="submit">Filtrar</button>
 		</form>
 
-		<ul>
+		{% if caronas %}
+			<div class="table-container">
+				<table border = "1">
+					<tr>
+						<!-- <th>Veículo</th> -->
+						<th>Ponto de Encontro</th>
+						<th>Destino</th>
+						<th>Vagas</th>
+						<th>Data e Hora</th>
+						<th>Ação</th>
+					</tr>
+					{% for carona in caronas %}
+						<tr>
+							<!-- <td>{{carona.veiculo}}</th> -->
+							<td>{{carona.ponto_encontro}}</th>
+							<td>{{carona.destino}}</th>
+							<td>{{carona.quantidade}}</td>
+							<td>{{carona.data_hora}}</th>
+							<td>
+								<!-- não faz nada, só criei o botão pra caso for desse jeito msm-->
+								<a href="">Aceitar</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</table>
+			</div>
+		{% elif consultado %}
+			<p> Nenhuma carona disponível :(.</p>
+		{% endif %}
+		<!-- <ul>
 			{% for carona in caronas %}
 				<li>{{ carona.veiculo }} - {{ carona.ponto_encontro }} - {{ carona.destino }} em {{ carona.data_hora }}</li>
 			{% endfor %}
-		</ul>
+		</ul> -->
 	</main>
 {% endblock %}

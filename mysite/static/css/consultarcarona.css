@@ -95,3 +95,11 @@ main {
     max-width: 1000px;
     width: 100%;
 }
+
+.table-container {
+    margin-top: 30px;
+}
+
+p {
+    text-align: center;
+}
