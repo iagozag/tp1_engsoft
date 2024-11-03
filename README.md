@@ -108,3 +108,18 @@
 4.5) Testes funcionais e integração (Todos)
 
 
+## <h3 align="center"> Setup <h3>
+
+## <h4> Instalar pacotes necessários <h4>
+
+```
+	pip install -r requirements.txt
+```
+
+## <h3 align="center"> Executando <h3>
+
+Entre na pasta "tp1_engsoft/mysite/" e execute o seguinte comando:
+
+```
+	python manage.py runserver
+```
