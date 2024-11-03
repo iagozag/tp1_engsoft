@@ -1,7 +1,7 @@
 {% extends 'mysite/base.html' %}
 {% load static %}
 
-{% block title %}configuracoes{% endblock %}
+{% block title %}Configurações{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/configuracoes.css' %}">
@@ -9,58 +9,96 @@
 
 {% block content %}
 <main>
-    <h2>Sua conta</h2>
-    <form method="post" class="form-alteracoes1 fform" >
-        {% csrf_token %}
-        <div class = "alteracoes1">
-            <div class="nome">
-                <h4>Alterar seu nome</h4>
-                <h5>Nome: {{ nome }} </h5>
-                {{ formnome.as_p }}
-            </div>
-
-            <div class="data">
-                <h4>Alterar sua data de nascimento</h4>
-                <h5>Data de nascimento: {{ data }} </h5>
-                {{ formdata.as_p }}
-            </div>
-            
-            <div class="numero">
-                <h4>Alterar seu número de telefone</h4>
-                <h5>Número atual: {{ tel }}</h5>
-                {{ formtel.as_p }}
-            </div>
-        </div>
-        <button type="submit">Alterar informações</button>
-    </form>
-    
-    <div class = "alteracoes2">
-        <form method="post" class="email fform">
-            {% csrf_token %}
-            <h4>Alterar seu e-mail</h4>
-            <h5>E-mail atual: {{ email }}</h5>
-            {{ formemail.as_p }}
-            <button type="submit">Alterar e-mail</button>
-        </form>
+    <div class="div-seletor">
+        <h2>Sua conta</h2>
+        <h3>Selecione a opção desejada:</h3>
         
-        <form method="post" class="senha fform">
-            {% csrf_token %}
-            <h4>Alterar sua senha</h4>
-            {{ formsen.as_p }}
-            <button type="submit" class="bsenha fform">Alterar senha</button>
-        </form>
-        
-        <form method="post" class="deleta fform">
-            {% csrf_token %}
-            <h4>Excluir sua conta</h4>
-            {{ formdel.as_p }}
-            <button type="submit" name="bdel">Confirmar exclusão</button>
-        </form>
+        <select id="form-selector" onchange="showForm()" class="seletor">
+            <option value=""></option>
+            <option value="nomeForm">Alterar seu nome</option>
+            <option value="dataForm">Alterar sua data de nascimento</option>
+            <option value="telForm">Alterar número de telefone</option>
+            <option value="emailForm">Alterar email</option>
+            <option value="senhaForm">Alterar sua senha</option>
+            <option value="deletaForm">Excluir sua conta</option>
+        </select>
     </div>
-        
+    
+    <div class="div-forms">
+        <div class="form-container" id="nomeForm" style="display: none;">
+            <h3>Alterar Nome</h3>
+            <h4>Nome: {{ nome }} </h4>
+            <form method="post" class="forms">
+                {% csrf_token %}
+                {{ formnome.as_p }}
+                <button type="submit">Alterar</button>
+            </form>
+        </div>
+        <div class="form-container" id="dataForm" style="display: none;">
+            <h3>Alterar data de nascimento</h3>
+            <h4>Data de nascimento: {{data}} </h4>
+            <form method="post" class="forms">
+                {% csrf_token %}
+                {{ formdata.as_p }}
+                <button type="submit">Alterar</button>
+            </form>
+        </div>
+        <div class="form-container" id="telForm" style="display: none;">
+            <h3>Alterar número de telefone</h3>
+            <h4>Número de telefone: {{tel}}</h4>
+            <form method="post" class="forms">
+                {% csrf_token %}
+                {{ formtel.as_p }}
+                <button type="submit">Alterar</button>
+            </form>
+        </div>
+        <div class="form-container" id="emailForm" style="display: none;">
+            <h3>Alterar e-mail</h3>
+            <h4>E-mail: {{email}}</h4>
+            <form method="post" class="forms">
+                {% csrf_token %}
+                {{ formemail.as_p }}
+                <button type="submit">Alterar</button>
+            </form>
+        </div>
+        <div class="form-container" id="senhaForm" style="display: none;">
+            <h3>Alterar sua senha</h3>
+            <form method="post" class="forms">
+                {% csrf_token %}
+                {{ formsen.as_p }}
+                <button type="submit">Alterar</button>
+            </form>
+        </div>
+        <div class="form-container" id="deletaForm" style="display: none;">
+            <h3>Apagar sua conta</h3>
+            <form method="post" class="forms">
+                {% csrf_token %}
+                {{ formdel.as_p }}
+                <button type="submit">Confirmar</button>
+            </form>
+        </div>
+    </div>
 
-    <div class = "div-deleta-cadastra">
-        <form method="post" class="form-deleta-cadastra fform">
+    <script>
+        function showForm() {
+            document.querySelectorAll('.form-container').forEach(function(form) {
+                form.style.display = 'none';
+            });
+            
+            const selectedValue = document.getElementById('form-selector').value;
+            if (selectedValue) {
+                console.log("valor: ",selectedValue);
+                const selectedForm = document.getElementById(selectedValue);
+                console.log("Exibindo o formulário:", selectedForm);
+                if (selectedForm) {
+                    selectedForm.style.display = 'block';
+                }
+            }
+        }
+    </script>
+    
+    <!-- <div class = "div-deleta-cadastra">
+        <form method="post" class="forms" class="form-deleta-cadastra fform">
             {% csrf_token %}
             {% if eh_motorista %}
             <button name = "descadastra_veiculo">Descadastrar um veiculo</button>
@@ -68,7 +106,7 @@
             <button name = "cadastra">Cadastrar um veículo</button>
             {% endif %}
         </form>
-    </div>
+    </div> -->
 </main>
     
 {% endblock %}

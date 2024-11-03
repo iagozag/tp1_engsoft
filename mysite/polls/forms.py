@@ -34,27 +34,25 @@ class LoginForm(forms.Form):
     senha = forms.CharField(widget=forms.PasswordInput)
 
 class NomeForm(forms.Form):
-    nome = forms.CharField(label = 'Novo nome' ,max_length=100,required=False)
+    nome = forms.CharField(label = 'Novo nome' ,max_length=100,required=True)
 
 class DataForm(forms.Form):
     data = forms.DateField(
-        input_formats=['%d/%m/%Y'],
+        input_formats=['%Y-%m-%d', '%d/%m/%Y'],
         label = 'Nova data de nascimento',
         widget=forms.DateInput(
             attrs={'type' : 'date', 'placeholder': 'dd/mm/yyyy'},
-            format='%d/%m/%Y'),
-        required=False
+            format='%Y/%m/%d'),
+        required=True
     )
     
-
     def clean_data(self):
+        m = date.today() - timedelta(days=13*365)
         d = self.cleaned_data['data']
-        max = date.today() - timedelta(days=13*365)
 
-        if d > max:
-            self.s = 'Você deve ter ao menos 13 anos para utilizar o sistema'
-            raise forms.ValidationError(self.s)
-        else: return d
+        if d > m:
+            raise forms.ValidationError('Você deve ter ao menos 13 anos para utilizar o sistema')
+        return d
 
 class TelefoneForm(forms.Form):
     telefone = forms.CharField(label = 'Novo número de telefone' ,max_length=15,required=False)
@@ -73,7 +71,7 @@ class SenhaForm(forms.Form):
     )
 
 class EmailForm(forms.Form):
-    email = forms.EmailField(label = 'Digite o novo e-mail', max_length=50,required=True)
+    email = forms.EmailField(label = 'Digite o novo e-mail',max_length=50,required=True)
 
 class DeletaForm(forms.Form):
     senha = forms.CharField(

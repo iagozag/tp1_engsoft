@@ -46,6 +46,7 @@ def completar_cadastro(request):
             usuario = Usuario(
                 cpf=request.session['cpf'],
                 email=request.session['email'],
+                nome=request.session['nome'],
                 senha=request.session['senha'],
                 data_nascimento=request.session['data_nascimento'],
                 telefone=request.session['telefone'],
@@ -126,60 +127,55 @@ def configuracoes(request):
     motorista = Veiculo.objects.filter(cpf_motorista=cpf).exists()
     
     usuario = Usuario.objects.get(cpf=cpf)
-
-    d = {'formnome'     : NomeForm(),
+    d = {
+         'formnome'     : NomeForm(),
          'formdata'     : DataForm(),
          'formtel'      : TelefoneForm(),
          'formsen'      : SenhaForm(),
          'formemail'    : EmailForm(),
          'formdel'      : DeletaForm(),
-         'eh_motorista' : motorista,
-         'nome'         : usuario.nome,
-         'data'         : usuario.data_nascimento,
-         'tel'          : usuario.telefone,
-         'email'        : usuario.email
+         'eh_motorista'   : motorista,
+         'nome'           : usuario.nome,
+         'data'           : usuario.data_nascimento,
+         'tel'            : usuario.telefone,
+         'email'          : usuario.email
         }
+
     
     if request.method == 'POST':
-        formData = DataForm(request.POST)
         formNome = NomeForm(request.POST)
+        formData = DataForm(request.POST)
         formTel = TelefoneForm(request.POST)
-        alterou = False
 
-        if 'cadastra' in request.POST: return redirect('veiculo')
+        # if 'cadastra' in request.POST: return redirect('veiculo')
         
-        if 'descadastra_veiculo' in request.POST:
-            Veiculo.objects.filter(cpf_motorista = cpf).delete()
-            return HttpResponse('Veĩculo descadastrado com sucesso')
+        # if 'descadastra_veiculo' in request.POST:
+        #     Veiculo.objects.filter(cpf_motorista = cpf).delete()
+        #     return HttpResponse('Veĩculo descadastrado com sucesso')
 
-        if formNome.has_changed():
-            if formNome.is_valid():
-                print('nome')
-                alterou = True
-                novoNome = formNome.cleaned_data['nome']
-                user = Usuario.objects.get(cpf=cpf)
-                user.nome = novoNome
-                user.save()
+        if formNome.has_changed() and formNome.is_valid():
+            novoNome = formNome.cleaned_data['nome']
+            usuario.nome = novoNome
+            usuario.save()
+            return HttpResponse("Nome alterado com sucesso")
 
         if formData.has_changed():
             if formData.is_valid():
-                print('data')
-                alterou = True
                 novaData = formData.cleaned_data['data']
-                user = Usuario.objects.get(cpf=cpf)
-                user.data_nascimento = novaData
-                user.save()
-            else: return HttpResponse(formData.s)
-
+                usuario.data_nascimento = novaData
+                usuario.save()
+                return HttpResponse('Data de nascimento alterada com sucesso')
+            else: 
+                print('teste2')
+                return HttpResponse("Você deve ter ao menos 13 anos para utilizar o sistema")
+        
         if formTel.has_changed() :
             if formTel.is_valid():
-                print('tel')
                 alterou = True
                 novoTel = formTel.cleaned_data['telefone']
-                user = Usuario.objects.get(cpf=cpf)
-                user.telefone = novoTel
-                user.save()
-        if alterou: return HttpResponse("informações atualizadas com sucesso")
+                usuario.telefone = novoTel
+                usuario.save()
+                return HttpResponse('Telefone alterado com sucesso')
 
         formSenha = SenhaForm(request.POST)
         if formSenha.is_valid():
@@ -205,8 +201,7 @@ def configuracoes(request):
             if senha!=user.senha: return HttpResponse("Senha incorreta!")
             logout(request)
             user.delete()
-            return redirect('cadastrar_usuario')
-            
+            return HttpResponse('Sua conta foi excluída com sucesso')
 
     return render(request, 'mysite/configuracoes.html',d)
 

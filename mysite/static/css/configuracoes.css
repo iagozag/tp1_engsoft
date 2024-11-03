@@ -6,7 +6,6 @@
 
 
 body {
-    background: #f6f5f7;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,9 +15,66 @@ body {
     margin: -20px 0 50px;
 }
 
-h2 {
-    font-size: 25px;
+.content{
+    height: 80%;
+    width: 60%;
+}
+
+.div-seletor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.div-forms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+}
+
+.form-container {
+    font-family: 'Montserrat', sans-serif;
+    height: 400px;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+    0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 10px;
+}
+
+.seletor {
+    font-family: 'Montserrat', sans-serif;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #000;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    appearance: none;
+    background-image: url('https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+    width: 300px;
+}
+
+.forms {
+    height: 60%;
+}
+
+h2 h3 h4 {
     color: black;
+    font-family: 'Montserrat', sans-serif;
+    text-align: right;
 }
 
 main {
@@ -28,44 +84,13 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 10px;
+    height: 100%;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
     0 10px 10px rgba(0,0,0,0.22);
+}
+
+input {
+    border: 1px solid black;
     border-radius: 10px;
-    margin-top: 40px;
-    position: relative;
-}
-
-.form-alteracoes1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.alteracoes1 {
-    padding: 0 50px;
-    justify-content:center;
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-}
-
-.nome, .data, .numero, .email, .senha, .deleta {
-    width: 350px;
-    margin: 10px;
-}
-
-.data {
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-.alteracoes2 {
-    padding-top: 10px;
-    justify-content:center;
-    position: relative;
-    display: flex;
-    margin: 20px;
-    vertical-align: top;
-    flex-direction: row;
 }
