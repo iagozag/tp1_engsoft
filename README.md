@@ -123,3 +123,5 @@ Entre na pasta "tp1_engsoft/mysite/" e execute o seguinte comando:
 ```
 	python manage.py runserver
 ```
+
+O site estará disponível no link: http://127.0.0.1:8000/
