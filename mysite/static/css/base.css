@@ -228,3 +228,11 @@ input {
 	font-family: 'Montserrat', sans-serif;
 	font-weight: normal;
 }
+
+.nav-logo {
+    height: 90px; /* Reduza ainda mais a altura */
+    max-width: 150px; /* Defina um limite máximo para a largura */
+    margin-right: 150px; /* Espaço entre a logo e o próximo item */
+    object-fit: contain; /* Garante que a imagem seja redimensionada sem distorção */
+}
+

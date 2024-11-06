@@ -10,7 +10,7 @@
 {% block content %}
     <main>
         <h2>Informações da carona:</h2>
-        <form method="post">
+        <form id=carona-form method="post">
             {% csrf_token %}
             <label for="quantidade">Passageiros:</label>
             {{ form.quantidade }}
@@ -28,11 +28,47 @@
 
             <label for="data_hora">Data e Hora:</label>
             {{ form.data_hora }}
+
             <button type="submit">Adicionar carona</button>
         </form>
+
+        <div id="popup-background" style="display: none;">
+            <div id="popup-confirmacao" class="popup">
+                <div class="popup-content">
+                    <p>Carona criada com sucesso!</p>
+                    <button onclick="fecharPopup()">OK</button>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <script>
+        document.getElementById("carona-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Impede o envio tradicional do formulário
+
+    const formData = new FormData(this);
+
+    fetch("{% url 'criar_carona' %}", {
+        method: "POST",
+        body: formData,
+    })
+    .then(response => {
+        if (response.ok) {
+            // Exibe o fundo e o popup de confirmação
+            document.getElementById("popup-background").style.display = "flex";
+        }
+    })
+    .catch(error => console.log("Erro ao criar carona:", error));
+});
+
+// Função para fechar o popup e redirecionar
+function fecharPopup() {
+    document.getElementById("popup-background").style.display = "none";
+    window.location.href = "{% url 'home' %}"; // Redireciona para a home
+}
+
+    
         function autocompleteAddress(inputId) {
     let input = document.getElementById(inputId).value;
     if (input.length < 3) return;
