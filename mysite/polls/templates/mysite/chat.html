@@ -1,0 +1,45 @@
+{% extends 'mysite/base.html' %}
+{% load static %}
+
+{% block title %}Chat{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+	<div id="chat-container">
+		<div id="chat-box">
+			<!-- As mensagens vão aparecer aqui -->
+		</div>
+		<input type="text" id="user-input" placeholder="Escreva uma mensagem..." />
+		<button onclick="sendMessage()">Enviar</button>
+	</div>
+
+	<script>
+		async function sendMessage() {
+			const message = document.getElementById("user-input").value.trim();
+			document.getElementById("chat-box").innerHTML += "<p>Você: " + message + "</p>";
+			document.getElementById("user-input").value = "";
+
+			const response = await fetch("{% url 'chat_api' %}", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"X-CSRFToken": "{{ csrf_token }}",
+				},
+				body: JSON.stringify({ message: message }),
+			});
+
+			const data = await response.json();
+			const chatResponse = data.response;
+			document.getElementById("chat-box").innerHTML += "<p>Motorista: " + chatResponse + "</p>";
+
+			const chatBox = document.getElementById("chat-box");
+			chatBox.scrollTop = chatBox.scrollHeight;
+		}
+	</script>
+
+	</main>
+{% endblock %}

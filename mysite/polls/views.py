@@ -12,6 +12,7 @@ from django.contrib.auth import logout
 from .forms import ConfirmacaoCancelamentoForm
 from django.http import JsonResponse
 from datetime import datetime
+import json
 
 def cadastrar_usuario(request):
     if request.method == 'POST':
@@ -302,3 +303,16 @@ def listar_caronas(request):
         
 
     return render(request, 'mysite/consulta.html', {'caronas':caronas, 'consultado': consultado})
+
+def chat(request, carona_id):
+    context = {'carona_id': carona_id}
+    return render(request, 'mysite/chat.html', context)
+
+async def chat_api(request):
+    if request.method == "POST":
+        body = json.loads(request.body)
+        user_message = body.get("message", "")
+        try:
+            return JsonResponse({"response": "ok"})
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
