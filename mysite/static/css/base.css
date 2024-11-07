@@ -49,8 +49,8 @@ a {
 button {
 	margin-top: 30px;
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid #C77966;
+	background-color: #C77966;
 	color: #FFFFFF;
 	font-size: 16px;
 	font-weight: bold;
@@ -109,8 +109,8 @@ input {
 }
 
 .navbar {
-    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-    background: linear-gradient(to right, #FF4B2B, #FF416C);
+    background: -webkit-linear-gradient(to right, #703030,#2F343B);
+    background: linear-gradient(to right,  #703030,#2F343B);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -147,7 +147,7 @@ input {
 }
 
 .nav-left a:hover, .nav-right a:hover {
-    color: #FFB3B3;
+    color: #E3CDA4;
 }
 
 .nav-icon {

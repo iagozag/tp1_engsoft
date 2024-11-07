@@ -40,7 +40,7 @@
 }
 
 .start-button {
-    background-color: black;
+    background-color: #2F343B;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -51,7 +51,7 @@
 }
 
 .start-button:hover {
-    background-color: #333;
+    background-color: #2F343B;
 }
 
 .login-link {
@@ -106,7 +106,7 @@ html{
 }
 
 footer {
-    background-color: #333;
+    background-color: #2F343B;
     color: #f4f4f4;
     text-align: center;
     padding: 15px 0;
