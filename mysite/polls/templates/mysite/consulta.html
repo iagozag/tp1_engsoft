@@ -44,7 +44,7 @@
 							<td>{{carona.data_hora}}</th>
 							<td>
 								<!-- não faz nada, só criei o botão pra caso for desse jeito msm-->
-								<a href="">Aceitar</a>
+								<a href="{% url 'chat' carona_id=carona.id %}">Conversar com motorista</a>	
 							</td>
 						</tr>
 					{% endfor %}

@@ -5,133 +5,86 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/leaflet.css' %}">
 {% endblock %}
 
 {% block content %}
-    <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Imagem e Texto</title>
-        <link rel="stylesheet" href="styles.css">
-        <!-- CSS do Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    </head>
-    <body>
-        <div class="espaco"> </div>
-        <div class="container">
-            <!-- Texto à esquerda -->
-            <div class="text-container">
-                <h1>Vá a qualquer lugar</h1>
-                <p>
-                    <a href="{% url 'cadastrar_usuario'%}" class="login-link">Cadastre-se</a>
-                    e consulte caronas disponiveis.
-                </p>
-            </div>
-
-            <div id="map"></div> <!-- Div que conterá o mapa -->
-
-            <!-- Script do Leaflet -->
-            <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-            <script>
-                // Inicializa o mapa com as coordenadas e o nível de zoom desejado
-                const map = L.map('map').setView([-19.87062, -43.967665], 14); // Coordenadas de São Paulo, Brasil
-    
-                // Adiciona o layer (camada) de OpenStreetMap ao mapa
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
-    
-                // Adiciona um marcador no mapa com um popup
-                const marker = L.marker([-19.87062, -43.967665]).addTo(map)
-                    .bindPopup('<b>UFMG</b><br />Brasil.')
-                    .openPopup();
-    
-                setTimeout(() => {
-                    map.invalidateSize();
-                }, 100);
-            </script>    
+    <div class="espaco"></div>
+    <div class="container">
+        <!-- Texto à esquerda -->
+        <div class="text-container">
+            <h1>Vá a qualquer lugar</h1>
+            <p>
+                <a href="{% url 'cadastrar_usuario' %}" class="login-link">Cadastre-se</a>
+                e consulte caronas disponíveis.
+            </p>
         </div>
-        <div class="container">
-            <img src="{% static 'images/carona.jpeg' %}" alt="Home" class="nav-icon">
-            <div class="text-content">
-                <h1>Estude com economia</h1>
-                <p>
-                    Consiga viagens confortaveis por preços acessíveis.
-                    Você pode usar conversar com o motorista e negociar seu preço.
-                </p>
-                <div class="buttons">
-                    <a href="{% url 'cadastrar_usuario'%}" class="start-button">Começar</a>
-                    <a href="{% url 'cadastrar_usuario'%}" class="login-link">Já tem uma conta? Fazer login</a>
-                </div>
+
+        <!-- Div que conterá o mapa -->
+        <div id="map"></div>
+
+        <!-- Script do Leaflet -->
+        <script src="{% static 'js/leaflet.js' %}"></script> 
+        <script>
+            // Inicializa o mapa com as coordenadas e o nível de zoom desejado
+            const map = L.map('map').setView([-19.87062, -43.967665], 14);
+
+            // Adiciona o layer de OpenStreetMap ao mapa
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Adiciona um marcador no mapa com um popup
+            const marker = L.marker([-19.87062, -43.967665]).addTo(map)
+                .bindPopup('<b>UFMG</b><br />Brasil.')
+                .openPopup();
+
+            // Corrige o redimensionamento do mapa se estiver dentro de um container responsivo
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 100);
+        </script>
+    </div>
+
+    <!-- Seções de conteúdo adicionais -->
+    <div class="container">
+        <img src="{% static 'images/carona.jpeg' %}" alt="Home" class="nav-icon">
+        <div class="text-content">
+            <h1>Estude com economia</h1>
+            <p>
+                Consiga viagens confortáveis por preços acessíveis.
+                Você pode conversar com o motorista e negociar seu preço.
+            </p>
+            <div class="buttons">
+                <a href="{% url 'cadastrar_usuario' %}" class="start-button">Começar</a>
+                <a href="{% url 'cadastrar_usuario' %}" class="login-link">Já tem uma conta? Fazer login</a>
             </div>
         </div>
-        <div class="container">
-            <div class="text-content">
-                <h1>Aumente sua renda</h1>
-                <p>
-                    Aumente sua renda enquanto segue a sua rotina. 
-                    Você pode ganhar dinheiro no caminho para a faculdade.
-                </p>
-                <div class="buttons">
-                    <a href="{% url 'cadastrar_usuario'%}" class="start-button">Começar</a>
-                    <a href="{% url 'cadastrar_usuario'%}" class="login-link">Já tem uma conta? Fazer login</a>
-                </div>
+    </div>
+
+    <div class="container">
+        <div class="text-content">
+            <h1>Aumente sua renda</h1>
+            <p>
+                Aumente sua renda enquanto segue a sua rotina.
+                Você pode ganhar dinheiro no caminho para a faculdade.
+            </p>
+            <div class="buttons">
+                <a href="{% url 'cadastrar_usuario' %}" class="start-button">Começar</a>
+                <a href="{% url 'cadastrar_usuario' %}" class="login-link">Já tem uma conta? Fazer login</a>
             </div>
-            <img src="{% static 'images/motorista.jpeg' %}" alt="Home" class="nav-icon">
         </div>
-        
-    
-
-    
- 
-
-    <!-- Adicionando JavaScript para alternar o comportamento do botão -->
-    <script>
-        let scrollingDown = true; // Controla se o botão está configurado para rolar para baixo ou para cima
-
-        // Função para alternar a rolagem para cima ou para baixo
-        function toggleScroll() {
-            if (scrollingDown) {
-                // Rolagem para o final da página
-                window.scrollTo({
-                    top: document.body.scrollHeight,
-                    behavior: "smooth"
-                });
-                document.querySelector('.scroll-button').textContent = '↑'; // Muda o texto para "Subir"
-            } else {
-                // Rolagem para o topo da página
-                window.scrollTo({
-                    top: document.body.scrollHeight,
-                    behavior: "smooth"
-                });
-                document.querySelector('.scroll-button').textContent = '↓'; // Muda o texto para "Descer"
-            }
-            scrollingDown = !scrollingDown; // Alterna a direção
-        }
-    </script>
-
-    <script>
-        var map = L.map('map').setView([51.505, -0.09], 13);
-
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        L.marker([51.5, -0.09]).addTo(map)
-            .bindPopup('A pretty CSS popup.<br> Easily customizable.')
-            .openPopup();
-    </script>
+        <img src="{% static 'images/motorista.jpeg' %}" alt="Home" class="nav-icon">
+    </div>
 
     <footer>
         <p>&copy; 2024 Caronas UFMG. Todos os direitos reservados.</p>
         <p>
-            <a href="#">Política de Privacidade</a> | 
-            <a href="#">Termos de Uso</a> | 
+            <a href="#">Política de Privacidade</a> |
+            <a href="#">Termos de Uso</a> |
             <a href="#">Contato</a>
         </p>
     </footer>
-    </body>
-    </html>
 {% endblock %}
 
