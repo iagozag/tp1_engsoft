@@ -118,8 +118,12 @@
 				.then(response => response.json())
 				.then(data => {
 					if (data.success) {
-						document.getElementById('veiculoForm').style.display = 'block';
-						document.getElementById('completaForm').style.display = 'none';
+						if (data.redirect === 'veiculo') {
+							document.getElementById('completaForm').style.display = 'none';
+							document.getElementById('veiculoForm').style.display = 'block';
+						} else {
+							window.location.href = "{% url 'home' %}";
+						}
 					} else {
 						alert(data.error);
 					}
@@ -150,3 +154,4 @@
 		</script>
 	</main>
 {% endblock %}
+

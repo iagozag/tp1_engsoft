@@ -59,7 +59,7 @@ def completar_cadastro(request):
             del request.session['data_nascimento']
             del request.session['telefone']
             
-            return JsonResponse({'success': True})
+            return JsonResponse({'success': True, 'redirect': 'home'})
         else:
             return JsonResponse({'success': False, 'error': form.errors})
 
