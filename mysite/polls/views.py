@@ -37,9 +37,9 @@ def completar_cadastro(request):
 
             request.session['cpf'] = form.cleaned_data['cpf']
             request.session['nome'] = form.cleaned_data['nome']
-            request.session['data_nascimento'] = form.cleaned_data['data_nascimento']
+            request.session['data_nascimento'] = form.cleaned_data['data_nascimento'].isoformat()
             request.session['telefone'] = form.cleaned_data['telefone']
-            
+
             if e_motorista:
                 return JsonResponse({'success': True, 'redirect': 'veiculo'})
 
@@ -48,14 +48,21 @@ def completar_cadastro(request):
                 email=request.session['email'],
                 nome=request.session['nome'],
                 senha=request.session['senha'],
-                data_nascimento=request.session['data_nascimento'],
+                data_nascimento=datetime.fromisoformat(request.session['data_nascimento']).date(),
                 telefone=request.session['telefone'],
             )
             usuario.save()
-            del request.session['email'], request.session['senha'], request.session['data_nascimento'], request.session['telefone']
+            
+            # Remover dados de sessão para segurança
+            del request.session['email']
+            del request.session['senha']
+            del request.session['data_nascimento']
+            del request.session['telefone']
+            
             return JsonResponse({'success': True})
         else:
             return JsonResponse({'success': False, 'error': form.errors})
+
 
 def cadastrar_veiculo(request):
     if request.method == 'POST':
