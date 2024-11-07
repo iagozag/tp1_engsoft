@@ -1,0 +1,126 @@
+/* Estilo para o contêiner principal */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilo para a imagem */
+.container img {
+    width: 85%;
+    height: 85%;
+    border-radius: 10px;
+}
+
+/* Estilo para o conteúdo de texto */
+.text-content {
+    max-width: 50%;
+    padding-left: 20px;
+}
+
+.text-content h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.text-content p {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Estilo para os botões */
+.buttons {
+    display: flex;
+    align-items: center;
+}
+
+.start-button {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.start-button:hover {
+    background-color: #333;
+}
+
+.login-link {
+    color: #555;
+    font-size: 1em;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para o botão de rolagem */
+.scroll-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+    display: block; /* Inicialmente escondido */
+    z-index: 1000; /* Garantir que o botão fique visível sobre outros conteúdos */
+}
+
+/* Mostrar o botão quando o usuário rolar a página para baixo */
+.scroll-button.show {
+    display: block;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+#bottom{
+    height: 100vh;
+    background-color: gray;
+}
+.espaco{
+    margin-top: 1300px;
+}
+
+#map {
+    height: 400px;
+    width: 48%;
+}
+.text-container{
+    margin-right: 200px;
+}
+
+footer {
+    background-color: #333;
+    color: #f4f4f4;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+footer a {
+    color: #f4f4f4;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
