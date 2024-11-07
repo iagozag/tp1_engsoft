@@ -5,67 +5,80 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/visualizarcarona.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 {% endblock %}
 
 {% block content %}
     <main>
-		<h2> Caronas Oferecidas</h2>
+        <h2>Caronas Oferecidas</h2>
 
-		{% if caronas %}
-			<div class="table-container">
-				<table border = "1">
-					<tr>
-						<th>Vagas</th>
-						<th>Veículo</th>
-						<th>Ponto de Encontro</th>
-						<th>Destino</th>
-						<th>Data e Hora</th>
-						<th>Ações</th>
-					</tr>
-					{% for carona in caronas %}
-						<tr>
-							<td>{{carona.quantidade}}</td>
-							<td>{{carona.veiculo}}</th>
-							<td>{{carona.ponto_encontro}}</th>
-							<td>{{carona.destino}}</th>
-							<td>{{carona.data_hora}}</th>
-							<td>
-								<a href="{% url 'editar_carona' carona.id %}">Editar</a> |
-							    <a href="#" onclick="showPopup({{carona.id}})">Excluir</a>	
-							</td>
-						</tr>
-					{% endfor %}
-				</table>
-			</div>
-		{% else %}
-			<p> Você não tem nenhuma carona oferecida no momento :).</p>
-		{% endif %}
+        {% if caronas %}
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vagas</th>
+                            <th>Veículo</th>
+                            <th>Ponto de Encontro</th>
+                            <th>Destino</th>
+                            <th>Data e Hora</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for carona in caronas %}
+                            <tr class="carona-row">
+                                <td>{{ carona.quantidade }}</td>
+                                <td>{{ carona.veiculo.modelo}}</td>
+                                <td>{{ carona.ponto_encontro }}</td>
+                                <td>{{ carona.destino }}</td>
+                                <td>{{ carona.data_hora }}</td>
+                                <td>
+                                    <!-- Ícone de editar -->
+                                    <a href="{% url 'editar_carona' carona.id %}">
+                                        <i class="fas fa-edit"></i>
+                                    </a> |
+                                    <!-- Ícone de excluir -->
+                                    <a href="#" onclick="showPopup({{ carona.id }})">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>Você não tem nenhuma carona oferecida no momento :).</p>
+        {% endif %}
 
-		<a href="{% url 'home' %}">&#8592; Página Principal</a>
+        <a href="{% url 'home' %}" class="home-link">
+			<i class="fas fa-home"></i> Página Principal
+		</a>		
 
-		<div id="confirmationPopup" class="popup" style="display:none;">
-			<div class="popup-content">
-				<p>Deseja confirmar a exclusão?</p>
-				<form id="deleteForm" method="POST" action="">
-					{% csrf_token %}
-					<button type="submit">Excluir</button>
-					<button type="button" onclick="closePopup()">Cancelar</button>
-				</form>
-			</div>
-		</div>
+        <div id="confirmationPopup" class="popup" style="display:none;">
+            <div class="popup-content">
+                <p>Deseja confirmar a exclusão?</p>
+                <form id="deleteForm" method="POST" action="">
+                    {% csrf_token %}
+                    <button type="submit">Excluir</button>
+                    <button type="button" onclick="closePopup()">Cancelar</button>
+                </form>
+            </div>
+        </div>
 
-	<script>
-		function showPopup(caronaId) {
-			caronaIdToDelete = caronaId;
-			const form = document.getElementById("deleteForm");
-			form.action = `/cancelar_carona/${caronaId}/`;
-			document.getElementById("confirmationPopup").style.display = "block";
-		}
+    <script>
+        function showPopup(caronaId) {
+            caronaIdToDelete = caronaId;
+            const form = document.getElementById("deleteForm");
+            form.action = `/cancelar_carona/${caronaId}/`;
+            document.getElementById("confirmationPopup").style.display = "block";
+        }
 
-		function closePopup() {
-			document.getElementById("confirmationPopup").style.display = "none";
-		}
-	</script>
+        function closePopup() {
+            document.getElementById("confirmationPopup").style.display = "none";
+        }
+    </script>
 
-	</main>
+    </main>
 {% endblock %}

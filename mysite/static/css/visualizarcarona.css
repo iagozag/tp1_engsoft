@@ -95,3 +95,75 @@ main {
     max-width: 1000px;
     width: 100%;
 }
+/* Estilos da tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+/* Efeito de destaque na linha */
+.carona-row:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+/* Estilos dos links de ação */
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+/* Estilização do link */
+.home-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px; /* Tamanho do texto */
+    padding: 8px 16px; /* Espaçamento interno */
+    background-color: black; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    border-radius: 25px; /* Bordas arredondadas */
+    text-decoration: none; /* Remove o sublinhado */
+    transition: background-color 0.3s, transform 0.3s; /* Transições suaves */
+}
+
+/* Estilos para o ícone */
+.home-link i {
+    margin-right: 8px; /* Espaçamento entre o ícone e o texto */
+}
+
+/* Efeito de hover */
+.home-link:hover {
+    background-color: black; /* Cor de fundo quando passar o cursor */
+    transform: scale(1.05); /* Aumenta ligeiramente o botão ao passar o cursor */
+    text-decoration: none;
+}
+
+/* Efeito de foco */
+.home-link:focus {
+    outline: none; /* Remove o contorno */
+    box-shadow: 0 0 5px black(0, 123, 255, 0.5); /* Adiciona sombra ao foco */
+}
