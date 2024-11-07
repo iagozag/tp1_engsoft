@@ -39,15 +39,14 @@ body {
 
 .form-container {
     font-family: 'Montserrat', sans-serif;
-    height: 400px;
-    width: 500px;
+    height: 250px;
+    width: 400px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     text-align: center;
     align-items: center;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-    0 10px 10px rgba(0,0,0,0.22);
+    box-shadow: none; 
     border-radius: 10px;
 }
 
