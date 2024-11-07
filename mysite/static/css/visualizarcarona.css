@@ -68,6 +68,7 @@ button {
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
+    text-decoration: none;
 }
 
 button:active {
@@ -117,6 +118,7 @@ th {
 .carona-row:hover {
     background-color: #f1f1f1;
     cursor: pointer;
+    text-decoration: none;
 }
 
 /* Estilos dos links de ação */
@@ -127,6 +129,7 @@ a {
 
 a:hover {
     text-decoration: underline;
+    text-decoration: none;
 }
 
 table tbody tr:nth-child(even) {

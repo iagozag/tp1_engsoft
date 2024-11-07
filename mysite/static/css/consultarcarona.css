@@ -137,3 +137,47 @@ p {
 .suggestion:hover {
     background-color: #f0f0f0; /* Cor ao passar o mouse */
 }
+
+/* Estilos da tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+/* Efeito de destaque na linha */
+.carona-row:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* Estilos dos links de ação */
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    text-decoration: none;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #fff;
+}

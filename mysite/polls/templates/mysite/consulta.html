@@ -4,29 +4,29 @@
 {% block title %}Busca de caronas{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/consultarcarona.css' %}">
+    <link rel="stylesheet" href="{% static 'css/consultarcarona.css'%}">
 {% endblock %}
 
 {% block content %}
     <main>
 		<h1>Consultar carona</h1>
+		{%if not caronas and not consultado%}
+			<form text-decoration: none;method="get" action="{% url 'listar_caronas' %}">
+				<label for="destino">Destino:</label>
+				<div class = "dropdown" style="position: relative;">
+					<input type = "text" id = "destino" name = "Destino" oninput="autocompleteAddress(this.id)">
+					<ul id = "destino-sugestoes" class = "dropdown-content"></ul>
+				</div>
 
-		<form method="get" action="{% url 'listar_caronas' %}">
-			<label for="destino">Destino:</label>
-			<div class = "dropdown" style="position: relative;">
-				<input type = "text" id = "destino" name = "Destino" oninput="autocompleteAddress(this.id)">
-				<ul id = "destino-sugestoes" class = "dropdown-content"></ul>
-			</div>
-
-			<label for="dia">Data :</label>
-			<input type="date" id="data" name="data">
-			
-			<button type="submit">Filtrar</button>
-		</form>
-
+				<label for="dia">Data :</label>
+				<input type="date" id="data" name="data">
+				
+				<button type="submit">Filtrar</button>
+			</form>
+		{%endif%}
 		{% if caronas %}
 			<div class="table-container">
-				<table border = "1">
+				<table>
 					<tr>
 						<!-- <th>Veículo</th> -->
 						<th>Ponto de Encontro</th>
