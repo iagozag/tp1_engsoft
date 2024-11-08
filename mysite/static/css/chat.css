@@ -5,6 +5,12 @@
 
 main {
     height: 100%;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+    0 10px 10px rgba(0,0,0,0.22);
+}
+
+body, main {
+    overflow: hidden; 
 }
 
 .div-chat {
@@ -14,18 +20,56 @@ main {
     padding-bottom: 50px;
     height: 100%;
     width: 400px;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-    0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 10px;
 }
 
 .div-mensagens {
+    /* background-color: black; */
+    margin-top: 0px;
     overflow: auto;
     width: 100%;
-    height: 100%;
+    height: 95%;
+    margin-bottom: 5%;
     padding-left: 25px;
+    display: flex;
+    flex-direction: column;
 }
 
 
 .botao-enviar {
     width: 160px;
+}
+
+.message {
+    display: inline-block; /* Isso permite que as divs ajustem seu tamanho com base no conteúdo */
+    padding: 8px 12px; /* Espacamento interno da div */
+    border-radius: 15px; /* Bordas arredondadas */
+    margin: 5px 0; /* Espaçamento entre as mensagens */
+    margin-top: 2   0px;
+    max-width: 70%; /* Limita o tamanho máximo da div */
+    word-wrap: break-word; /* Garante que o texto quebre quando necessário */
+    white-space: pre-wrap; /* Quebra de linha dentro da div */
+    align-items: center;
+    border: 1px solid gray;
+}
+
+.user-message {
+    background-color: #f1f8e9;
+    margin: 20px;
+    padding: 20px;
+    margin-right: 30px;
+    text-align: right;
+    align-self: flex-end;
+}
+
+.motorista-message {
+    background-color:   #e0f7fa;
+    padding: 20px;
+    /* background-color: blue; */
+    text-align: left;
+    align-self: flex-start;
+}
+
+strong {
+    margin-top: 100px;
 }
