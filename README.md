@@ -33,11 +33,11 @@
 
 - SQLlite (banco de dados)
 
-- Leaflet
+- Leaflet (https://leafletjs.com/)
 
-- Geopify
+- Geopify (https://www.geoapify.com/)
 
-- BERT
+- BERT em português para perguntas e respostas (https://huggingface.co/pierreguillou/bert-base-cased-squad-v1.1-portuguese)
 
 ## <h3 align="center"> Backlog do produto <h3>
 
