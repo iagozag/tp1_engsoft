@@ -9,12 +9,12 @@
 
 {% block content %}
     <main>
-	<div id="chat-container">
-		<div id="chat-box">
+	<div id="chat-container" class="div-chat">
+		<div id="chat-box" class="div-mensagens">
 			<!-- As mensagens vão aparecer aqui -->
 		</div>
 		<input type="text" id="user-input" placeholder="Escreva uma mensagem..." />
-		<button onclick="sendMessage()">Enviar</button>
+		<button onclick="sendMessage()" class="botao-enviar">Enviar</button>
 	</div>
 
 	<script>
