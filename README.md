@@ -17,7 +17,7 @@
 
 - Deborah Brito Yamamoto (Full-Stack)
 
-- Iago Zagnoli Albergaria (Front-end)
+- Iago Zagnoli Albergaria (Full-Stack)
 
 - Manuel Junio Ferraz Cardoso (Full-Stack) 
 
@@ -97,18 +97,34 @@
 
 ## <h4> 4: como usuário, quero efetuar uma carona <h4>
 
-4.1) Criar lógica de inscrição em carona (Back-end, Deborah)
+4.1) Criar lógica de inscrição em carona (Front-end, Deborah)
 
-4.2) Criar interface que confirma carona (Front-end, Iago)
+4.2) Criar lógica com inteligência artificial (Back-end, Iago)
 
-4.3) Criar lógica para cancelamento de carona (Back-end, Caroline)
+4.3) Criar página principal (Front-end, Caroline)
 
-4.4) Criar interface para cancelamento (Front-end, Manuel)
+4.4) Criar interface do chat com o motorista (Front-end, Manuel)
 
 4.5) Testes funcionais e integração (Todos)
 
 
 ## <h3 align="center"> Setup <h3>
+
+# Diagramas UML
+## Diagrama de atividades
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/dc409c14-33ab-408f-bc6e-70b64775756d" alt="DIagrama de atividades">
+<!-- ![atividades](https://github.com/user-attachments/assets/dc409c14-33ab-408f-bc6e-70b64775756d) -->
+</p>
+
+## Diagrama relacional
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f7eea4d3-7271-49be-9eba-c72ff332a238" alt="Diagrama do banco de dados">
+<!-- ![atividades](https://github.com/user-attachments/assets/dc409c14-33ab-408f-bc6e-70b64775756d) -->
+</p>
+<!-- ![relacional](https://github.com/user-attachments/assets/f7eea4d3-7271-49be-9eba-c72ff332a238) -->
 
 ## <h4> Instalar pacotes necessários <h4>
 
