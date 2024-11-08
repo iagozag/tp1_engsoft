@@ -59,6 +59,7 @@ def completar_cadastro(request):
             # Remover dados de sessão para segurança
             del request.session['email']
             del request.session['senha']
+            del request.session['nome']
             del request.session['data_nascimento']
             del request.session['telefone']
             
@@ -77,6 +78,7 @@ def cadastrar_veiculo(request):
                 cpf=request.session['cpf'],
                 email=request.session['email'],
                 senha=request.session['senha'],
+                nome=request.session['nome'],
                 data_nascimento=request.session['data_nascimento'],
                 telefone=request.session['telefone'],
             )
@@ -85,7 +87,7 @@ def cadastrar_veiculo(request):
             veiculo.cpf_motorista = usuario
             veiculo.save()
 
-            del request.session['email'], request.session['senha'], request.session['data_nascimento'], request.session['telefone']
+            del request.session['email'], request.session['senha'], request.session['data_nascimento'], request.session['telefone'], request.session['nome']
             return JsonResponse({'success': True})
         else:
             return JsonResponse({'success': False, 'error': form.errors})
