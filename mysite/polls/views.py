@@ -13,6 +13,8 @@ from .forms import ConfirmacaoCancelamentoForm
 from django.http import JsonResponse
 from datetime import datetime
 import json
+import asyncio
+from transformers import pipeline
 
 def cadastrar_usuario(request):
     if request.method == 'POST':
@@ -308,11 +310,20 @@ def chat(request, carona_id):
     context = {'carona_id': carona_id}
     return render(request, 'mysite/chat.html', context)
 
+context = r"""
+Você vai sair do big shopping, você estará no big shopping às 7:00, e pode esperar até 15 minutos de atraso. Seu destino é o ICEX. E a previsão de chegada é 7:30. A placa do carro SDU3E31.
+"""
+
+model_name = 'pierreguillou/bert-base-cased-squad-v1.1-portuguese'
+nlp = pipeline("question-answering", model=model_name)
+
 async def chat_api(request):
     if request.method == "POST":
         body = json.loads(request.body)
         user_message = body.get("message", "")
         try:
-            return JsonResponse({"response": "ok"})
+            result = nlp(question=user_message, context=context)
+            chat_response = result['answer']
+            return JsonResponse({"response": chat_response})
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
