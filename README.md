@@ -33,6 +33,11 @@
 
 - SQLlite (banco de dados)
 
+- Leaflet
+
+- Geopify
+
+- BERT
 
 ## <h3 align="center"> Backlog do produto <h3>
 
