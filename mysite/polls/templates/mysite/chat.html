@@ -13,16 +13,27 @@
 		<div id="chat-box" class="div-mensagens">
 			<!-- As mensagens vão aparecer aqui -->
 		</div>
-		<input type="text" id="user-input" placeholder="Escreva uma mensagem..." />
+		<input  type="text" id="user-input" placeholder="Escreva uma mensagem..." />
 		<button onclick="sendMessage()" class="botao-enviar">Enviar</button>
 	</div>
 
 	<script>
+		// função alterada, mas acho q só mudou a interação com o html e no backend fica igual
 		async function sendMessage() {
 			const message = document.getElementById("user-input").value.trim();
-			document.getElementById("chat-box").innerHTML += "<p>Você: " + message + "</p>";
+			if (message === "") return;  // Se a mensagem estiver vazia, não faça nada
+	
+			// Adiciona a mensagem do usuário na div correspondente
+			const chatBox = document.getElementById("chat-box");
+			const userMessageDiv = document.createElement("div");
+			userMessageDiv.classList.add("message", "user-message");
+			userMessageDiv.innerHTML = `<strong></strong> ${message}`;
+			chatBox.appendChild(userMessageDiv);
+	
+			// Limpa o campo de entrada de texto
 			document.getElementById("user-input").value = "";
-
+	
+			// Faz a chamada à API para obter a resposta do motorista
 			const response = await fetch("{% url 'chat_api' %}", {
 				method: "POST",
 				headers: {
@@ -31,15 +42,22 @@
 				},
 				body: JSON.stringify({ message: message }),
 			});
-
+	
 			const data = await response.json();
 			const chatResponse = data.response;
-			document.getElementById("chat-box").innerHTML += "<p>Motorista: " + chatResponse + "</p>";
-
-			const chatBox = document.getElementById("chat-box");
+	
+			// Adiciona a resposta do motorista na div correspondente
+			const motoristaMessageDiv = document.createElement("div");
+			motoristaMessageDiv.classList.add("message", "motorista-message");
+			motoristaMessageDiv.innerHTML = `<strong></strong> ${chatResponse}`;
+			chatBox.appendChild(motoristaMessageDiv);
+	
+			// Scroll automático para o final da conversa
 			chatBox.scrollTop = chatBox.scrollHeight;
+	
 		}
 	</script>
+	
 
 	</main>
 {% endblock %}
